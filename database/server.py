@@ -49,4 +49,3 @@ class DatabaseConnect:
         DROP TABLE IF EXISTS {tablename} CASCADE
         """
         return self.cursor.execute(command)
-
