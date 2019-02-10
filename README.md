@@ -42,11 +42,11 @@ clone the github repo to your computer:
   - click `My records` tab to display past records.
   - click `Logout` tab to leave page.
   - top right corner contains brief user profile information.
-* <a href="https://rhytah.github.io/iReporter/UI/admin.htm">Admin interface</a> 
+* <a href="https://rhytah.github.io/iReporter-integrated/UI/admin.htm">Admin interface</a> 
   - click on status to display options to change status of a record
 
 ## GH-Pages.
-my site is published at https://rhytah.github.io/iReporter/UI/index.htm
+my site is published at https://rhytah.github.io/iReporter-integrated/UI/index.htm
 
 
 # API-VERSION2 
@@ -111,8 +111,7 @@ This is version two "v2" of the API
 
 ## Run app in postman
 
-[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/a0c27385b8d5855dcd14)
-
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/e3f48c296918745740fd)
 ## Hosted application link
 
 [Heroku hosted link](https://rhytah-ireporterv2.herokuapp.com/)
