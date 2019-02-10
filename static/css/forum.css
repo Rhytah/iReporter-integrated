@@ -123,7 +123,7 @@ button {
   border: 1px solid #ccc;
   border-top: none;
   width:60%;
-  float:right;
+  /* float:right; */
 
 }
 
@@ -193,10 +193,11 @@ input[type=submit]:hover {
 /* my records */
 
 table {
-  display:none;
+  /* display:none; */
   border-collapse: collapse;
   border-spacing: 0;
   width: 100%;
+  font-size:14px;
   border: 1px solid #ddd;
 }
 
@@ -342,7 +343,15 @@ h3{
 #profile{
   float: right;
 }
-
+ul{
+  font-size:14px;
+}
+.gt-redflags{
+  width:50%;
+  margin:auto;
+  color:white;
+  background: #3e8e41;
+}
 .card {
   box-shadow: 0 4px 8px 0 rgba(255, 0, 255, 0.431);
   max-width: 300px;
@@ -387,6 +396,14 @@ button:hover, a:hover {
   box-shadow: 0px 8px 16px 0px rgba(216, 162, 162, 0.2);
   z-index: 1;
   
+}
+li{
+  width: 100%;
+  padding: 5px;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;
+  color:navy;
 }
 
 .dropdown-content a {
@@ -445,6 +462,9 @@ h2 {
       border: none;
       background: #f1f1f1;
   }
+  ul{
+    font-size: 12px;
+  }
 }
 
 @media screen and (max-width: 800px) {
@@ -481,7 +501,7 @@ h2 {
   th, td {
     text-align: left;
     padding: 05px;
-    font-size:12px;
+    font-size:10px;
   }
   .container{
     width: fit-content;
