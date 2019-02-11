@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/Rhytah/iReporter-integrated.svg?branch=develop)](https://travis-ci.org/Rhytah/iReporter-integrated)  [![Coverage Status](https://coveralls.io/repos/github/Rhytah/iReporter-integrated/badge.svg?branch=develop)](https://coveralls.io/github/Rhytah/iReporter-integrated?branch=develop) [![Maintainability](https://api.codeclimate.com/v1/badges/e28b889db9f04910afe6/maintainability)](https://codeclimate.com/github/Rhytah/iReporter/maintainability)
+[![Build Status](https://travis-ci.org/Rhytah/iReporter-integrated.svg?branch=develop)](https://travis-ci.org/Rhytah/iReporter-integrated)  [![Coverage Status](https://coveralls.io/repos/github/Rhytah/iReporter-integrated/badge.svg?branch=develop)](https://coveralls.io/github/Rhytah/iReporter-integrated?branch=develop) [![Maintainability](https://api.codeclimate.com/v1/badges/9c17afd46ba149329df3/maintainability)](https://codeclimate.com/github/Rhytah/iReporter-integrated/maintainability)
 
 # iReporter
 
@@ -18,7 +18,7 @@ iReporter enables any/every citizen to bring any form of corruption to the notic
 
 ## Getting Started
 clone the github repo to your computer:
-* $git clone https://github.com/Rhytah/iReporter.git
+* $git clone https://github.com/Rhytah/iReporter-integrated.git
 * Extract the zip file to another file
 * Open using text editor
 * Run it using web browser 
@@ -34,9 +34,9 @@ clone the github repo to your computer:
 * JAVASCRIPT.
 
 ### Usage
-* launch <a href="https://rhytah.github.io/iReporter/UI/index.htm">Index</a>  to access Sign Up/ Sign In options
+* launch <a href="https://rhytah.github.io/iReporter-integrated/UI/index.htm">Index</a>  to access Sign Up/ Sign In options
 * On successful login, you will be redirected to webpage that contains information relevant to your logged in account(either user or Admin).
-* <a href="https://rhytah.github.io/iReporter/UI/forum.htm">User interface</a> 
+* <a href="https://rhytah.github.io/iReporter-integrated/UI/forum.htm">User interface</a> 
   - click `create red-flag` tab to display input fields.
   - click `create intervention record` tab to display input fields.
   - click `My records` tab to display past records.
@@ -112,6 +112,7 @@ This is version two "v2" of the API
 ## Run app in postman
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/e3f48c296918745740fd)
+
 ## Hosted application link
 
 [Heroku hosted link](https://rhytah-ireporterv2.herokuapp.com/)
@@ -119,5 +120,5 @@ https://rhytah-ireporterv2.herokuapp.com/
 
 ## API Documentation link
 
-[Documentation](https://documenter.getpostman.com/view/4755480/RzthQB82)
-https://documenter.getpostman.com/view/4755480/RzthQB82
+[Documentation](https://documenter.getpostman.com/view/4755480/RztprTuB)
+https://documenter.getpostman.com/view/4755480/RztprTuB
