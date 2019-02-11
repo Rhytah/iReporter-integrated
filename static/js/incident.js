@@ -26,6 +26,7 @@ fetch(redflag_url,{
     headers :{'content_type':'application/json','Authorization':authorization_header},
     body : JSON.stringify(redflag)  
 })
+
 .then ((response) => response.json())
     .then((data) => {
         if(data.message === 'Successfully added red-flag'){
@@ -41,13 +42,13 @@ fetch(redflag_url,{
 
 // intervention
 const intervention_form= document.getElementById('addintervention');
-intervention_form.addEventListener('submit',addIntervention)
-let intervention_comment = document.getElementById('intervention_comment')
+intervention_form.addEventListener('submit',addIntervention);
+let intervention_comment = document.getElementById('intervention_comment');
 
-let intervention_image = document.getElementById('image_path')
-let intervention_video = document.getElementById('video_path')
-let intervention_location_latitude = document.getElementById('intervention_location_latitude')
-let intervention_location_longitude = document.getElementById('intervention_location_longitude')
+let intervention_image = document.getElementById('image_path');
+let intervention_video = document.getElementById('video_path');
+let intervention_location_latitude = document.getElementById('intervention_location_latitude');
+let intervention_location_longitude = document.getElementById('intervention_location_longitude');
 
 const intervention_url = 'https://rhytah-ireporterv2.herokuapp.com/api/v2/interventions/'
 
