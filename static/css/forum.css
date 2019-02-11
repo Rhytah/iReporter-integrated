@@ -139,8 +139,19 @@ button {
     font-size:14px;
 }
 .tabcontent input[type=submit]{
-  width:fit-content;
-  height:25px;
+  width:30%;
+  height:40px;
+  padding:4px;
+  margin-block-start: 2px;
+  color:rgb(209, 192, 36);
+
+}
+.tabcontent input[type=button]{
+  width:10%;
+  height:20px;
+  padding:4px;
+  float: right;
+  color:rgb(209, 192, 36);
 
 }
 #red-flag input[type=file] {
@@ -165,8 +176,15 @@ textarea{
     height:150px;
     font-size: 14px;
 }
-
-
+/* style search */
+#redflag_search{
+  height:30px;
+  width:100px;
+}
+#intervention_search{
+  height:30px;
+  width:100px;
+}
 #intervention input[type=text], select {
   width: 100%;
   padding: 12px 20px;
@@ -354,7 +372,7 @@ ul{
 }
 .card {
   box-shadow: 0 4px 8px 0 rgba(255, 0, 255, 0.431);
-  max-width: 300px;
+  /* max-width: 300px; */
   margin: auto;
   text-align: center;
   font-family: arial;
