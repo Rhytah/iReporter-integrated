@@ -139,13 +139,25 @@
       </div> 
     </div>
         <div class="tabcontent" id="output">
-            <p id="invalid"></p>                            
-         
-              <button id="getredflags">View Redflags</button>
-          </div> 
+            <span onclick="hide('output');">close</span>
 
-          <div class="tabcontent" id="output1">
+            <p id="invalid"></p>       
+            <div id="singleredflag">
+                <!-- <input type="text" id="myInput"  placeholder="Filter inventory." > -->
+                <input type="text" placeholder="Search.."  id= "redflag_search">
+                <input type="submit" id= "flag_search" value ="Get redflag" />
+              <div id="output2">
+
+              </div>
+
+              </div>  
+              <button id="getredflags">View Redflags</button>
+             
+            </div> 
+          <div class="tabcontent" id="output1" class="modal">
               <button id="getinterventions">View Interventions</button>
+              <span onclick="hide('output1');">close</span>
+
           </div> 
 
     <script src="../static/js/incident.js"></script>
