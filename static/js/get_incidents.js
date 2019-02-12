@@ -74,7 +74,7 @@ function get_one_redflag(e) {
             <li>Date: ${redflag.created_on}</li>
             <li>image: ${redflag.image}</li>
             <li>video: ${redflag.video}</li>
-            <li>Latitude: ${redflag.lat}</li>
+            <li id="modify">Latitude: ${redflag.lat}</li>
             <li> Longitude: ${redflag.long}</li>
             <li> Status: ${redflag.status}</li>
             <li> Comment: ${redflag.comment}</li>
@@ -136,7 +136,7 @@ function get_one_intervention(e) {
     e.preventDefault();
     let interventionid = document.getElementById('intervention_search').value;
     let intervention_id = parseInt(interventionid);
-    console.log(intervention_id);
+    // console.log(intervention_id);
     if (isNaN(intervention_id)){
         alert("Please insert an ID")
     }
