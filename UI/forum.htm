@@ -27,7 +27,7 @@
         <div class="tab">
                 <button class="tablink" onclick="opentab(event,'red-flag')">Create red-flag</button> 
                 <button class="tablink" onclick="opentab(event,'intervention')">Create intervention record</button> 
-                <button class="tablink" onclick="opentab(event,'recordrf')">My redflag records</button> 
+                <button class="tablink" onclick="opentab(event,'recordrf');refreshRedflags();">My redflag records</button> 
                 <button class="tablink" onclick="opentab(event,'recordintven')">My interventions records</button> 
                 <button onclick="parent.location ='index.htm'">Logout</button>
          
@@ -139,20 +139,14 @@
       </div> 
     </div>
         <div class="tabcontent" id="recordrf">
-            <input type="button" onclick="document.getElementById('recordrf').style.display='none'" class="cancelbtn" value="X"/>
+          <div id="output">
+            
+          </div>
 
-            <div id="singleredflag">
-               <input type="text" placeholder="Redflag id...."  id= "redflag_search">
-                <br>
-                <input type="submit" id= "flag_search" value ="Get redflag" />
-              <div id="output2">
-              </div>
-              <input type="submit" id="getredflags" value="View Redflags"/>
-             <div id="output"></div>
-            </div> 
+       
         </div>
-          <div class="tabcontent" id="recordintven" >
-              <input type="button" onclick="document.getElementById('recordintven').style.display='none'" class="cancelbtn" value="X"/>
+          < <div class="tabcontent" id="recordintven" >                
+            <input type="button" onclick="document.getElementById('recordintven').style.display='none'" class="cancelbtn" value="X"/>
 
             <div id="singleintervention">
                 <input type="text" placeholder="intervention id...."  id= "intervention_search">
@@ -162,7 +156,7 @@
               <br>
               <input type="submit" id="getinterventions" value="Interventions"/>
                 <div id="output1"></div>
-            </div>
+            </div> 
           </div> 
 
     <script src="../static/js/incident.js"></script>

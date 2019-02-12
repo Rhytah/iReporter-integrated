@@ -30,7 +30,7 @@ class Redflag:
         return deleted
 
     def modify_location(self,lat,long,redflag_id):
-        sql = "UPDATE redflags SET lat,long = '{}' WHERE redflag_id = '{}' RETURNING lat,long;".format(lat,long,redflag_id)
+        sql = "UPDATE redflags SET lat='{}',long = '{}' WHERE redflag_id = '{}' RETURNING lat,long;".format(lat,long,redflag_id)
         updated_rows = 0    
         db.cursor.execute(sql)
         updated_rows = db.cursor.rowcount

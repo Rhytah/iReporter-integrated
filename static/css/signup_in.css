@@ -16,7 +16,9 @@ input[type=tel], input[type=email] {
     border: none;
     background: #f1f1f1;
 }
-
+p{
+    font-size: 16px;
+}
 /* Add a background color when the inputs get focus */
 input[type=text]:focus, input[type=password]:focus {
     background-color: #ddd;
@@ -131,7 +133,7 @@ hr {
     width:40%;
     height:fit-content;
     padding: 30px;
-    margin-left: 300px;
+    margin:auto;
     
 }
 #adminbtn{

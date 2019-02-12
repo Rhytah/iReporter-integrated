@@ -2,7 +2,7 @@ const get_redflag_url = 'https://rhytah-ireporterv2.herokuapp.com/api/v2/red-fla
 const get_intervention_url = 'https://rhytah-ireporterv2.herokuapp.com/api/v2/interventions/'
 
 
-document.getElementById('getredflags').addEventListener('click', refreshRedflags);
+// document.getElementById('getredflags').addEventListener('click', refreshRedflags);
 document.getElementById('getinterventions').addEventListener('click', refreshInterventions);
 document.getElementById('flag_search').addEventListener('click',get_one_redflag);
 document.getElementById('interven_search').addEventListener('click',get_one_intervention);
@@ -22,19 +22,38 @@ function refreshRedflags(){
         let output ='<h2>RedFlags</h2>';
         let redflags = data["data"];
         redflags.forEach(function(redflag){
-        output += `
-        <ul>
-        <li>ID: ${redflag.redflag_id}</li>
-        <li>UserID: ${redflag.created_by}</li>
-        <li>Date: ${redflag.created_on}</li>
-        <li>image: ${redflag.image}</li>
-        <li>video: ${redflag.video}</li>
-        <li>Latitude: ${redflag.lat}</li>
-        <li> Longitude: ${redflag.long}</li>
-        <li> Status: ${redflag.status}</li>
-        <li> Comment: ${redflag.comment}</li>
-        </ul>
-        `;
+        // output += `
+        // <ul>
+        // <li>ID: ${redflag.redflag_id}</li>
+        // <li>UserID: ${redflag.created_by}</li>
+
+        // <li> Comment: ${redflag.comment}</li>
+        // </        // <li>Date: ${redflag.created_on}</li>
+        // <li>image: ${redflag.image}</li>
+        // <li>video: ${redflag.video}</li>
+        // <li>Latitude: ${redflag.lat}</li>
+        // <li> Longitude: ${redflag.long}</li>
+        // <li> Status: ${redflag.status}</li>ul>
+        // `;
+        output +=`
+        
+       
+
+            <div class="accordion">${redflag.comment}
+            <span id=""> more....</span>
+            <div class="panel" id="panel">
+               
+                <ul>
+                <li>Date: ${redflag.created_on}</li>
+                <li>image: ${redflag.image}</li>
+                <li>video: ${redflag.video}</li>
+                <li>Latitude: ${redflag.lat}</li>
+                <li> Longitude: ${redflag.long}</li>
+            <li> Status: ${redflag.status}</li>
+            </ul>
+            </div>
+        </div>
+        `
             });
             document.getElementById('output').innerHTML = output;
         }
@@ -179,4 +198,20 @@ function get_one_intervention(e) {
     .catch(error => console.log(error));
     
 
+}
+
+// collapsible
+var acc = document.getElementsByClassName("accordion");
+var i;
+
+for (i = 0; i < acc.length; i++) {
+  acc[i].addEventListener('click',  function() {
+    this.classList.toggle('active');
+    var panel = this.nextElementSibling;
+    if (panel.style.maxHeight){
+      panel.style.maxHeight = null;
+    } else {
+      panel.style.maxHeight = panel.scrollHeight + "px";
+    } 
+  });
 }

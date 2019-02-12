@@ -1,4 +1,4 @@
-
+document.getElementById('myusername').addEventListener('load',displayName);
 // Get the modal
 var modal = document.getElementById('');
 
@@ -52,3 +52,8 @@ function opentab(evt, tabName ){
         map = new google.maps.Map(document.getElementById("map"), myOptions);
     }
     
+
+// profile
+// function displayName(event){
+//     username =
+// }
