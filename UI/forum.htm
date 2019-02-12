@@ -27,8 +27,8 @@
         <div class="tab">
                 <button class="tablink" onclick="opentab(event,'red-flag')">Create red-flag</button> 
                 <button class="tablink" onclick="opentab(event,'intervention')">Create intervention record</button> 
-                <button class="tablink" onclick="opentab(event,'output')">My redflag records</button> 
-                <button class="tablink" onclick="opentab(event,'output1')">My interventions records</button> 
+                <button class="tablink" onclick="opentab(event,'recordrf')">My redflag records</button> 
+                <button class="tablink" onclick="opentab(event,'recordintven')">My interventions records</button> 
                 <button onclick="parent.location ='index.htm'">Logout</button>
          
         </div>
@@ -138,14 +138,31 @@
             <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.7469267709002!2d32.58938551425394!3d0.34276089974992735!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x177dbbae66ee50d7%3A0xcb984cde3aba1954!2sAndela+Uganda+Limited!5e0!3m2!1sen!2sus!4v1543174070721" ></iframe>                          
       </div> 
     </div>
-        <div class="tabcontent" id="output">
-            <p id="invalid"></p>                            
-         
-              <button id="getredflags">View Redflags</button>
-          </div> 
+        <div class="tabcontent" id="recordrf">
+            <input type="button" onclick="document.getElementById('recordrf').style.display='none'" class="cancelbtn" value="X"/>
 
-          <div class="tabcontent" id="output1">
-              <button id="getinterventions">View Interventions</button>
+            <div id="singleredflag">
+               <input type="text" placeholder="Redflag id...."  id= "redflag_search">
+                <br>
+                <input type="submit" id= "flag_search" value ="Get redflag" />
+              <div id="output2">
+              </div>
+              <input type="submit" id="getredflags" value="View Redflags"/>
+             <div id="output"></div>
+            </div> 
+        </div>
+          <div class="tabcontent" id="recordintven" >
+              <input type="button" onclick="document.getElementById('recordintven').style.display='none'" class="cancelbtn" value="X"/>
+
+            <div id="singleintervention">
+                <input type="text" placeholder="intervention id...."  id= "intervention_search">
+              <br>
+                <input type="submit" id= "interven_search" value ="Get intervention" />
+                <div id="output3"></div>
+              <br>
+              <input type="submit" id="getinterventions" value="Interventions"/>
+                <div id="output1"></div>
+            </div>
           </div> 
 
     <script src="../static/js/incident.js"></script>
