@@ -1,5 +1,6 @@
 document.getElementById('login').addEventListener('submit',signinUser)
-
+// let username = document.getElementById('login_username').value
+// let password = document.getElementById('psw').value
 const login_url = 'https://rhytah-ireporterv2.herokuapp.com/api/v2/auth/login/';
 
 function signinUser(event) {
@@ -25,3 +26,17 @@ function signinUser(event) {
         
         })
 }
+// picking username on sign in
+function check(form)
+{
+
+if(form.username && password)
+ {
+
+alert("Welcome to iReporter");
+var userid = document.getElementById('login_username').value;
+document.write("Welcome " + userid);
+
+  }
+  
+  }

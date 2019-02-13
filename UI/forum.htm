@@ -10,33 +10,32 @@
 </head>
 <body>
         
-         <div id="profile"class="card">
-          <div class="dropdown">
-            <h2 class="dropbtn">Rhytah Namono</h2>
-            <div class="dropdown-content">
-              <a href="#records">5 recorded red-flags</a>
-              <a href="#records">3 interventions recorded</a>
-              <a onclick="show('records');">Details</a>
-             
-           <a href="index.htm">Logout</a>
-            </div>
-        </div>
-        </div>
-        <h2>iReporter</h2> 
-    <div class="container">
-        <div class="tab">
-                <button class="tablink" onclick="opentab(event,'red-flag')">Create red-flag</button> 
-                <button class="tablink" onclick="opentab(event,'intervention')">Create intervention record</button> 
-                <button class="tablink" onclick="opentab(event,'recordrf');refreshRedflags();">My redflag records</button> 
-                <button class="tablink" onclick="opentab(event,'recordintven')">My interventions records</button> 
-                <button onclick="parent.location ='index.htm'">Logout</button>
-         
-        </div>
 
+        <h2>iReporter</h2> 
+         
+     
+<button class="tablink" onclick="openPage('red-flag')">Create redflag</button>
+<button class="tablink" onclick="openPage('intervention')" >Create intervention record</button>
+<button class="tablink" onclick="openPage('recordrf'); refreshRedflags();">My redflag records</button>
+<button class="tablink" onclick="openPage('recordintven');refreshInterventions();">My interventions records</button>
+<button class="tablink" onclick="openPage('profile')"id="defaultOpen">Profile</button>
+
+
+    <div id="profile"class="tabcontent">
+        
+          <h2 class="dropbtn">Rhytah Namono</h2>
+          <div class="dropdown-content"></div>
+            <a href="#records">5 recorded red-flags</a>
+            <a href="#records">3 interventions recorded</a>
+            <a onclick="show('records');">Details</a>
+          
+        <a href="index.htm">Logout</a>
+         
+      </div>
+      </div>
         <div class="tabcontent" id="red-flag">
             <form id="usrform">
-
-                <p id="invalid"></p>
+              
                 <label>Report an Incident linked to corruption</label>
                 <br>
                 <label>Title:</label><br>
@@ -57,7 +56,6 @@
                   <div>
                 <input type="file" name="pic" accept="image/*" id="image">
                 <span></span>
-                <input type="submit" id="upload" value="Upload">
                 <br>
               <p>
                 <label>
@@ -66,7 +64,7 @@
               <div>
                   <input type="file" name="pic" accept="image/*" id="video">
                   <span></span>
-                  <input type="submit" id='vid' value="Upload"></div>
+                  </div>
                 
                 </p>
 
@@ -93,8 +91,6 @@
                           <label>Geolocation</label>
                           <span onclick="getLocation();">Pick cordinates</span>
                           <p type="text" id="intervention_combined_location"> </p>
-                          <!-- <input type="number" step="0.001" placeholder="Write Latitude here" id="lat" > -->
-                          <!-- <input type="text" placeholder="Write Longitude here" onclick="showPosition();" id="long">  -->
                           <input type="text" pattern="-?\d{1,3}\.\d+" id="intervention_location_latitude">
                           <input type="text" pattern="-?\d{1,3}\.\d+" id="intervention_location_longitude">
 
@@ -114,7 +110,7 @@
 
                           <input type="file" name="pic" accept="image/*" id="image_path">
                           <span></span>
-                          <input type="submit" id="upload" value="Upload">
+                         
                           <br>
                         <p>
                           <label>
@@ -123,8 +119,9 @@
                         <div>
                             <input type="file" name="pic" accept="image/*" id="video_path">
                             <span></span>
-                            <input type="submit" id='vid' value="Upload"></div>
-                          
+                        </div>
+                            
+                                                     
                           </p>
          
                           <input type="submit" value="Submit" id="completeintervention">
@@ -138,26 +135,27 @@
             <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.7469267709002!2d32.58938551425394!3d0.34276089974992735!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x177dbbae66ee50d7%3A0xcb984cde3aba1954!2sAndela+Uganda+Limited!5e0!3m2!1sen!2sus!4v1543174070721" ></iframe>                          
       </div> 
     </div>
-        <div class="tabcontent" id="recordrf">
+        <div class="tabcontent" id="recordrf" >
           <div id="output">
             
           </div>
-
-       
         </div>
-          < <div class="tabcontent" id="recordintven" >                
-            <input type="button" onclick="document.getElementById('recordintven').style.display='none'" class="cancelbtn" value="X"/>
+          <div class="tabcontent" id="recordintven" >        
+              <div id="output1"></div>        
+            <!-- <input type="button" onclick="document.getElementById('recordintven').style.display='none'" class="cancelbtn" value="X"/>
 
             <div id="singleintervention">
-                <input type="text" placeholder="intervention id...."  id= "intervention_search">
+              <input type="text" placeholder="intervention id...."  id= "intervention_search">
               <br>
                 <input type="submit" id= "interven_search" value ="Get intervention" />
                 <div id="output3"></div>
               <br>
-              <input type="submit" id="getinterventions" value="Interventions"/>
-                <div id="output1"></div>
+              <input type="submit" id="getinterventions" value="Interventions"/> -->
+                <!-- <div id="output1"></div> -->
             </div> 
-          </div> 
+          <!-- </div>  -->
+          
+        
 
     <script src="../static/js/incident.js"></script>
     <script src="../static/js/get_incidents.js"></script>

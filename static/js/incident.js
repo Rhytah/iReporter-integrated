@@ -30,15 +30,19 @@ fetch(redflag_url,{
 .then ((response) => response.json())
     .then((data) => {
         if(data.message === 'Successfully added red-flag'){
-            invalid.textContent = '' + data.message
+            alert('Successfully added red-flag');
             window.location.reload()
         }else{
-            invalid.textContent = '' + data.message
+            textContent = '' + data.error
+            
+            alert(textContent);
         }
-        console.log(data)
     })
-    .catch((err) => console.log(err), invalid.textContent = "something went wrong")
 }
+    //     console.log(data)
+    // })
+    // .catch((err) => console.log(err), invalid.textContent = "something went wrong")
+// }
 
 // intervention
 const intervention_form= document.getElementById('addintervention');
