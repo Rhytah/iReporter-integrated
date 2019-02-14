@@ -56,7 +56,7 @@ let intervention_location_longitude = document.getElementById('intervention_loca
 
 const intervention_url = 'https://rhytah-ireporterv2.herokuapp.com/api/v2/interventions/'
 
-var x = document.getElementById('intervention_combined_location');
+let x = document.getElementById('intervention_combined_location');
 
 function getLocation() {
   if (navigator.geolocation) {

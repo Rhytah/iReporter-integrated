@@ -13,7 +13,10 @@
     
     <h2>iReporter</h2>
 <div class="container">
-  <blockquote>
+    <h2>Speak up for your community</h2>
+    <br>
+    <h3 onclick="show('intro')" >Learn more....</h3>
+  <blockquote id="intro">
       Corruption is a huge bane to Africa’s development. 
       <br>
       African countries must develop novel and localised solutions that will curb this menace, hence the birth of iReporter. 
@@ -22,18 +25,6 @@
       <br>
       Users can also report on things that needs government intervention.
   </blockquote>
-  
-  
-  <div class="panel" id="admin_login">
-    <form action="admin.htm">
-        <label for="email"><b>Email</b></label>
-        <input type="text" placeholder="Enter Email" id="adminemail" required ="required"/>
-  
-        <label for="psw"><b>Password</b></label>
-        <input type="password" placeholder="Enter Password" id="adminpsw" required="required"/>
-    <button>Login</button> 
-    </form>
-</div>
       
         <div class="panel" id="login">
           <form action="forum.htm">
@@ -44,9 +35,7 @@
               <label for="psw"><b>Password</b></label>
               <input type="password" placeholder="Enter Password" id="psw" required="required"/>
           <button type="submit" onclick="check(this.form)">Login</button> 
-          <!-- <button id="adminbtn" onclick="document.getElementById('admin_login').style.display='block';document.getElementById('login').style.display='none';" > Admin Login</button> -->
           <br>
-          <!-- <p id="signupbtn" onclick="document.getElementById('signup').style.display='block'" style="width:auto;">Don't have an account? Signup here</p> -->
       <p >Don't have an account? <span id="signupbtn" onclick="document.getElementById('signup').style.display='block'">Signup here</span></p>
         </form>
       

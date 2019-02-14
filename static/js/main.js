@@ -20,21 +20,7 @@ function hide(id){
     a.style.display= 'block';
 }
 
-//open tab 
-// function opentab(evt, tabName ){
-//     var t, tabcontent, tablink;
-//     tabcontent=document.getElementsByClassName('tabcontent');
-//     for(t=0; t< tabcontent.length; t++){
-//       tabcontent[t].style.display="none";
-//     }
-//     tablink =document.getElementsByClassName('tablink');
-//     for(t=0; t <tablink.length; t++){
-//       tablink[t].className = tablink[t].className.replace("active ", "");
-//     }
-//     document.getElementById(tabName).style.display = "block";
-//   evt.currentTarget.className += "active";
 
-// }
 function openPage(pageName) {
     var i, tabcontent, tablinks;
     tabcontent = document.getElementsByClassName("tabcontent");
@@ -49,8 +35,6 @@ function openPage(pageName) {
     // elmnt.style.backgroundColor = color;
   }
   
-  // Get the element with id="defaultOpen" and click on it
-//   document.getElementById("defaultOpen").click();
 
 
     var map;

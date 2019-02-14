@@ -22,7 +22,8 @@ function refreshRedflags(){
     .then((data) => {
         if(data.message === 'These are the recorded red-flags'){
         let output =`<h2>RedFlags</h2>
-                    <table>
+        <input type="text" id="myInput" onkeyup="getOneRecord()" placeholder="Search for redflag.." title="Enter title">
+                    <table id="recordtable">
                     <th> ISSUE</th>
                     <th> REPORTED ON </th>
                     <th> IMAGE </th>
@@ -30,14 +31,13 @@ function refreshRedflags(){
                     <th> LATITUDE </th>
                     <th> LONGITUDE</th>
                     <th> STATUS </th>
-                    
+                    <tbody>
                     `;
         let redflags = data["data"];
         redflags.forEach(function(redflag){
 
         output +=`
         
-        <tbody>
         <tr >
         <td class = "incident-item">${redflag.comment}</td>        
         <td class = "incident-item-0">${redflag.created_on}</td>
@@ -131,8 +131,10 @@ function refreshInterventions(){
     .then((response) => response.json())
     .then((data) => {
         if(data.message === 'These are the Intervention records'){
-        let output1 =`<h2>RedFlags</h2>
-                <table>
+        let output1 =`<h2>Interventionss</h2>
+        <input type="text" id="myInput" onkeyup="getOneRecord()" placeholder="Search for intervention.." title="Enter title">
+
+                <table id="recordtable" style="overflow-x:auto;">
                 <th> ISSUE</th>
                 <th> REPORTED ON </th>
                 <th> IMAGE </th>
@@ -140,21 +142,30 @@ function refreshInterventions(){
                 <th> LATITUDE </th>
                 <th> LONGITUDE</th>
                 <th> STATUS </th>
+                <th> SUBMIT EDITS<th>
+                <tbody>
         
         `;
         let interventions = data["data"];
         interventions.forEach(function(intervention){
         output1 += `
         
-        <tbody>
+        
         <tr >
-        <td class = "incident-item">${intervention.comment}</td>        
+        <td class = "incident-item" id="comm">${intervention.comment}</td>        
         <td class = "incident-item-0">${intervention.created_on}</td>
         <td class = "incident-item-1">${intervention.image}</td>
         <td class = "incident-item-2">${intervention.video}</td>
-        <td class = "incident-item-3">${intervention.lat}</td>
-        <td class = "incident-item-4">${intervention.long}</td>
+        <td class = "incident-item-3" id="modifylat">${intervention.lat}
+       
+        </td>
+        <td class = "incident-item-4" id="modifylong">${intervention.long}
+        </td>
+
         <td class = "incident-item-5">${intervention.status}</td>
+        <td id="unseenid">${intervention.intervention_id}</td>
+        <td><button onclick="show('editsection')">edit</button>
+        </td>
         </tr>
            
         `;
@@ -163,54 +174,26 @@ function refreshInterventions(){
         }
         console.log(data)
     })
-    .catch((error) => console.log(error), invalid.textContent = "Ooops. Something went wrong");
-}
-
-function get_one_intervention(e) {
-    e.preventDefault();
-    let interventionid = document.getElementById('intervention_search').value;
-    let intervention_id = parseInt(interventionid);
-    // console.log(intervention_id);
-    if (isNaN(intervention_id)){
-        alert("Please insert an ID")
-    }
-   
-    const options = {
-        method : 'GET',
-        mode : 'cors',
-    }
-    fetch(get_intervention_url+intervention_id,options)
-    .then (res => res.json())
-    .then ((data) => {
-        if (data.status === 200){
-           let intervention = data["data"];
-           let  output3 = `<h4>fetched intervention</h4>`
-            
-            output3 += `
-            <br>
-            <ul>
-            <li>ID: ${intervention.intervention_id}</li>
-            <li>UserID: ${intervention.created_by}</li>
-            <li>Date: ${intervention.created_on}</li>
-            <li>image: ${intervention.image}</li>
-            <li>video: ${intervention.video}</li>
-            <li>Latitude: ${intervention.lat}</li>
-            <li> Longitude: ${intervention.long}</li>
-            <li> Status: ${intervention.status}</li>
-            <li> Comment: ${intervention.comment}</li>
-            </ul>
-            
-            `;
-            
-                    console.log(data);
-                    document.getElementById('output3').innerHTML= output3; 
-                }
-            else {
-                console.log(data);
-                alert ('the record is non existent') 
-        }
-    })
-    .catch(error => console.log(error));
     
-
 }
+
+
+// 
+function getOneRecord() {
+    let input, filter, table, tr, td, i, txtValue;
+    input = document.getElementById("myInput");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("recordtable");
+    tr = table.getElementsByTagName("tr");
+    for (i = 0; i < tr.length; i++) {
+      td = tr[i].getElementsByTagName("td")[0];
+      if (td) {
+        txtValue = td.textContent || td.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+          tr[i].style.display = "";
+        } else {
+          tr[i].style.display = "none";
+        }
+      }       
+    }
+  }
