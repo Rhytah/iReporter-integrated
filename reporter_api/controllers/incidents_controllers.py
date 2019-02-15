@@ -22,15 +22,16 @@ class IncidentsController:
         status = "draft"
         created_by = userid
         created_on =datetime.datetime.now()
-        location = data.get('location')
+        lat = data.get('lat')
+        long =data.get('long')
         image = data.get ('image')
         video = data.get('video')
         comment = data.get('comment')
-        invalid_redflag= validator.validate_incident(location,image,video,comment)
+        invalid_redflag= validator.validate_incident(lat,long,image,video,comment)
         if invalid_redflag:
             return invalid_redflag
         
-        new_redflag=redflag_obj.create_redflag(created_by,created_on,status, location, image,video,comment)
+        new_redflag=redflag_obj.create_redflag(created_by,created_on,status, lat,long, image,video,comment)
    
         return jsonify ({
             "status":201,
