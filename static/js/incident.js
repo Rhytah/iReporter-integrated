@@ -10,6 +10,7 @@ let comment  = document.getElementById('comment')
 
 let invalid = document.getElementById('invalid')
 
+
 function addRedflag(event){
     event.preventDefault()
     let redflag ={
@@ -93,12 +94,12 @@ fetch(intervention_url,{
 .then ((response) => response.json())
     .then((data) => {
         if(data.message === 'Successfully added intervention'){
-            invalid.textContent = '' + data.message
+            alert(data.message);
             window.location.reload()
         }else{
-            invalid.textContent = '' + data.message
+            alert(data.error);
         }
         console.log(data)
     })
-    .catch((err) => console.log(err), invalid.textContent = "something went wrong")
+    .catch((err) => console.log(err));
 }

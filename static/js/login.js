@@ -23,6 +23,8 @@ function signinUser(event) {
             else if(data.message == "You have successfully logged in"){
             alert(data.message)
             localStorage.setItem('token', data.token)
+            localStorage.setItem('username', username)
+
             window.location.replace('./forum.htm')
             }
             else{

@@ -1,5 +1,6 @@
 const get_redflag_url = 'https://rhytah-ireporterv2.herokuapp.com/api/v2/red-flags/'
 const get_intervention_url = 'https://rhytah-ireporterv2.herokuapp.com/api/v2/interventions/'
+document.getElementById('save_edits').addEventListener('click',modifyLocation);
 
 
 // document.getElementById('recordrf').addEventListener('click', refreshRedflags);
@@ -52,6 +53,7 @@ function refreshRedflags(){
       
             });
             document.getElementById('output').innerHTML = output;
+            localStorage.setItem(redflag_id,'redflag_id')
         }
         console.log(data)
     })
@@ -121,8 +123,7 @@ function get_one_redflag(e) {
 
 // fetch interventions
 function refreshInterventions(){
-    let invalid = document.getElementById('invalid');
- 
+
     fetch(get_intervention_url, {
         method: 'GET',
         mode: 'cors',
@@ -131,7 +132,7 @@ function refreshInterventions(){
     .then((response) => response.json())
     .then((data) => {
         if(data.message === 'These are the Intervention records'){
-        let output1 =`<h2>Interventionss</h2>
+        let output1 =`<h2>Interventions</h2>
         <input type="text" id="myInput" onkeyup="getOneRecord()" placeholder="Search for intervention.." title="Enter title">
 
                 <table id="recordtable" style="overflow-x:auto;">
@@ -163,16 +164,20 @@ function refreshInterventions(){
         </td>
 
         <td class = "incident-item-5">${intervention.status}</td>
-        <td id="unseenid">${intervention.intervention_id}</td>
-        <td><button onclick="show('editsection')">edit</button>
+        <td >${intervention.intervention_id}</td>
+        <td  ><a onClick="show('editsection')">edit</a>" "<a>delete</a>
         </td>
         </tr>
            
         `;
             });
             document.getElementById('output1').innerHTML = output1;
+            intervention = interventions['intervention_id']
+            // console.log(intervention.intervention_id)
         }
+        // alert(data.error);
         console.log(data)
+        
     })
     
 }
@@ -197,3 +202,50 @@ function getOneRecord() {
       }       
     }
   }
+
+
+// localStorage.setItem("intervention_id",intervention);
+
+
+
+
+function modifyLocation(){
+
+    let id = document.getElementById('modify-id').value;
+    let required_id = parseInt(id);
+    console.log(required_id);
+    if (isNaN(required_id)){
+        alert("Please insert an ID")
+    }
+    
+    // let required_id=localStorage.getItem("intervention_id");
+    let lat =document.getElementById('edit_location_latitude').value;
+    let long =document.getElementById('edit_location_longitude').value;
+    // let newlocation = {
+    //     lat:lat,
+    //     long:long
+    // }
+// console.log(required_id)
+fetch(get_intervention_url+required_id+'/location',{
+    method:'PATCH',
+    mode: 'cors',
+    headers :{'content_type':'application/json'},
+    body : JSON.stringify({"lat":lat, "long":long})
+})
+.then (response => response.json())
+.then((data) => {
+    if(data.status == 200){
+        textContent = '' + data.message
+        alert(textContent);
+        document.getElementById("intervention_location_latitude").innerHTML=lat
+        document.getElementById("intervention_location_longitude").innerHTML=long
+        console.log(data)
+        // window.location.reload()
+    }else{
+        alert(data.error)
+    }
+    console.log(data)
+})
+
+ .catch((error) => console.log(error));
+}
