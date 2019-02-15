@@ -34,10 +34,10 @@ function signUp(event){
     .then((response) => response.json())
         .then((data) => {
             if (data.status == 200){
-               alert("Signup successful")
+               alert(data.message)
                 window.location.replace('./index.htm')
             }else{
-                textContent = ''+data.message
+                textContent = ''+data.error+' '+data.data
                 alert(textContent);
             }
             
