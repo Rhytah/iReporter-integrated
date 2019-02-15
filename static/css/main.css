@@ -2,9 +2,10 @@ body {
     font-family: "Lato", sans-serif;
     color: goldenrod;
     transition: background-color .5s;
-    background:rgb(3, 37, 92);
+    background:#2471A3;
     background-repeat: no-repeat;
     background-position: center;
+    margin:10px 20px;
 
 }
 
@@ -12,12 +13,18 @@ h3{
     background-color: goldenrod;
     color:blue;
     width:10%;
-    float: right;
+    margin-left: 45%;
     font-size: 16px;
+    cursor: pointer;
 }
-blockquote{
+blockquote {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: 16px;
+    width:80%;
+    padding:auto;
+    position: center;
+    margin:auto;
+    display: none;
 }
 #main {
     transition: margin-left .5s;
@@ -114,13 +121,14 @@ h2 {
 
 @media only screen and (max-width:400px){
     body{
-        color: rgb(92, 112, 177);
+        color: rgb(237, 239, 243);
     } 
     .container blockquote{
         font-size:12px;
         width:100%;
-        padding:0;
-        margin-left: 0;
+        padding:auto;
+        position: center;
+        margin-left: auto;
     }
     button{
         width:fit-content;

@@ -10,6 +10,7 @@ let comment  = document.getElementById('comment')
 
 let invalid = document.getElementById('invalid')
 
+
 function addRedflag(event){
     event.preventDefault()
     let redflag ={
@@ -26,32 +27,37 @@ fetch(redflag_url,{
     headers :{'content_type':'application/json','Authorization':authorization_header},
     body : JSON.stringify(redflag)  
 })
+
 .then ((response) => response.json())
     .then((data) => {
         if(data.message === 'Successfully added red-flag'){
-            invalid.textContent = '' + data.message
+            alert('Successfully added red-flag');
             window.location.reload()
         }else{
-            invalid.textContent = '' + data.message
+            textContent = '' + data.error
+            
+            alert(textContent);
         }
-        console.log(data)
     })
-    .catch((err) => console.log(err), invalid.textContent = "something went wrong")
 }
+    //     console.log(data)
+    // })
+    // .catch((err) => console.log(err), invalid.textContent = "something went wrong")
+// }
 
 // intervention
 const intervention_form= document.getElementById('addintervention');
-intervention_form.addEventListener('submit',addIntervention)
-let intervention_comment = document.getElementById('intervention_comment')
+intervention_form.addEventListener('submit',addIntervention);
+let intervention_comment = document.getElementById('intervention_comment');
 
-let intervention_image = document.getElementById('image_path')
-let intervention_video = document.getElementById('video_path')
-let intervention_location_latitude = document.getElementById('intervention_location_latitude')
-let intervention_location_longitude = document.getElementById('intervention_location_longitude')
+let intervention_image = document.getElementById('image_path');
+let intervention_video = document.getElementById('video_path');
+let intervention_location_latitude = document.getElementById('intervention_location_latitude');
+let intervention_location_longitude = document.getElementById('intervention_location_longitude');
 
 const intervention_url = 'https://rhytah-ireporterv2.herokuapp.com/api/v2/interventions/'
 
-var x = document.getElementById('intervention_combined_location');
+let x = document.getElementById('intervention_combined_location');
 
 function getLocation() {
   if (navigator.geolocation) {
@@ -88,12 +94,12 @@ fetch(intervention_url,{
 .then ((response) => response.json())
     .then((data) => {
         if(data.message === 'Successfully added intervention'){
-            invalid.textContent = '' + data.message
+            alert(data.message);
             window.location.reload()
         }else{
-            invalid.textContent = '' + data.message
+            alert(data.error);
         }
         console.log(data)
     })
-    .catch((err) => console.log(err), invalid.textContent = "something went wrong")
+    .catch((err) => console.log(err));
 }

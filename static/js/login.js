@@ -4,25 +4,46 @@ const login_url = 'https://rhytah-ireporterv2.herokuapp.com/api/v2/auth/login/';
 
 function signinUser(event) {
     event.preventDefault()
-    let username = document.getElementById('login_username')
-    let password = document.getElementById('psw')
-    let invalid = document.getElementById('invalid_login')
-
+    let username = document.getElementById('login_username').value
+    let password = document.getElementById('psw').value
     fetch(login_url, {
         method: 'POST',
         mode: 'cors',
         headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({username: username.value, password: password.value})
+        body: JSON.stringify({username: username, password: password})
     })
     .then((response) => response.json())
         .then((data) => {
-            if (data.message == "You have successfully logged in"){
-                window.location.replace('./forum.htm')
+            if(username === "admin" && password === "sup3rpsW"){
                 localStorage.setItem('token', data.token)
-            }else{
-                invalid.textContent = '' + data.message
+                window.location.replace('./admin.htm')
+                alert("You have successfully logged in as admin");
+
             }
-            console.log(data)
+            else if(data.message == "You have successfully logged in"){
+            alert(data.message)
+            localStorage.setItem('token', data.token)
+            localStorage.setItem('username', username)
+
+            window.location.replace('./forum.htm')
+            }
+            else{
+                alert(data.error);
+            }
+        
         })
-        .catch((err) => console.log(err), invalid.textContent = "Oooops.......Something went wrong! Contact administrator")
 }
+// picking username on sign in
+function check(form)
+{
+
+if(form.username && password)
+ {
+
+alert("Welcome to iReporter");
+var userid = document.getElementById('login_username').value;
+document.write("Welcome " + userid);
+
+  }
+  
+  }

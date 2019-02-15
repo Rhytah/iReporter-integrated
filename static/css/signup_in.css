@@ -2,13 +2,23 @@
 /* Full-width input fields */
 input[type=text], input[type=password] {
     width: 100%;
-    padding: 15px;
+    padding: 5px;
+    margin: 5px 0 22px 0;
+    display: inline-block;
+    border-bottom: none;
+    background: #f1f1f1;
+}
+input[type=tel], input[type=email] {
+    width: 100%;
+    padding: 5px;
     margin: 5px 0 22px 0;
     display: inline-block;
     border: none;
     background: #f1f1f1;
 }
-
+p{
+    font-size: 16px;
+}
 /* Add a background color when the inputs get focus */
 input[type=text]:focus, input[type=password]:focus {
     background-color: #ddd;
@@ -18,7 +28,7 @@ input[type=text]:focus, input[type=password]:focus {
 button {
     background-color: #4CAF50;
     color: white;
-    padding: 14px 20px;
+    padding: 6px;
     margin: 8px 0;
     border: none;
     cursor: pointer;
@@ -37,9 +47,12 @@ button:hover {
 }
 
 /* Float cancel and signup buttons and add an equal width */
-.cancelbtn, .signupbtn {
-  float: left;
+.cancelbtn, #signupbtn {
+  cursor:pointer; 
   width: 50%;
+  text-decoration-line: underline;
+  text-decoration-color: dodgerblue;
+  font-weight: bolder;
 }
 
 /* Add padding to container elements */
@@ -59,7 +72,7 @@ button:hover {
     position: center;
     overflow: auto; /* Enable scroll if needed */
     background-color: #1a1c1f;
-    padding-top: 50px;
+    padding-top: 10px;
 }
 
 /* Modal Content/Box */
@@ -89,7 +102,7 @@ hr {
 }
 
 #signup{
-    font-size:20px;
+    font-size:15px;
     background: rgba(2, 72, 119, 0.37);
    
 
@@ -97,6 +110,7 @@ hr {
 #login {
     font-size:20px;
     background: rgba(2, 72, 119, 0.37);   
+    
 }
 
 #login .psw{
@@ -119,16 +133,14 @@ hr {
     width:40%;
     height:fit-content;
     padding: 30px;
-    margin-left: 300px;
+    margin:auto;
     
 }
 #adminbtn{
     widows: 37%;
     float:right;
 }
-#signupbtn{
-margin-left:27%;
-}
+
 .panel button{
     width:30%;
     align-content: center;
@@ -166,6 +178,7 @@ margin-left:27%;
     label{
         font-size:14px;
     }
+
     input[type=text], input[type=password] {
         width: 100%;
         padding: 5px;

@@ -1,46 +1,42 @@
-<!DOCTYPE <!DOCTYPE html>
-<html>
+<!DOCTYPE html>
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Forum|iReporter</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="../static/css/forum.css" />
+    <!-- <link rel="stylesheet" type="text/css" media="screen" href="../static/css/signup_in.css" /> -->
+
     <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
     <script src="../static/js/main.js"></script>
 </head>
 <body>
         
-        <div id="profile"class="card">
-          <div class="dropdown">
-            <h2 class="dropbtn">Rhytah Namono</h2>
-            <div class="dropdown-content">
-              <a href="#records">5 recorded red-flags</a>
-              <a href="#records">3 interventions recorded</a>
-              <a onclick="show('records');">Details</a>
-             
-           <a href="index.htm">Logout</a>
-            </div>
-        </div>
-        </div>
+
         <h2>iReporter</h2> 
-    <div class="container">
-        <div class="tab">
-                <button class="tablink" onclick="opentab(event,'red-flag')">Create red-flag</button> 
-                <button class="tablink" onclick="opentab(event,'intervention')">Create intervention record</button> 
-                <button class="tablink" onclick="opentab(event,'records')">My records</button> 
-                <button onclick="parent.location ='index.htm'">Logout</button>
          
-        </div>
+<div id="container">
+<button class="tablink" onclick="openPage('red-flag')">Create redflag</button>
+<button class="tablink" onclick="openPage('intervention')" >Create intervention record</button>
+<button class="tablink" onclick="openPage('recordrf'); refreshRedflags();">My redflag records</button>
+<button class="tablink" onclick="openPage('recordintven');refreshInterventions();">My interventions records</button>
+<button class="tablink" onclick="openPage('profile')"id="defaultOpen">Profile</button>
+</div>
 
-
+    <div id="profile"class="tabcontent">
+      
+<script>document.write("<h2>Welcome  "+localStorage.username+"</h2>");</script>
+          
+        <a href="index.htm">Logout</a>
+         
+      </div>
+      </div>
         <div class="tabcontent" id="red-flag">
             <form id="usrform">
-
-              <p id="invalid"></p>
+              
                 <label>Report an Incident linked to corruption</label>
                 <br>
-                <label>Title:</label>
+                <label>Title:</label><br>
                 <input type="text" id="issue" placeholder="Write title here">
                 <br>
                 <label>Detailed Report:</label><br>
@@ -56,9 +52,8 @@
                 Attach Image
                 </label>
                   <div>
-                <input type="file" name="pic" accept="image/*" id="image">
+                <input type="file" name="pic" accept="image/*" id="image" multiple>
                 <span></span>
-                <input type="submit" id="upload" value="Upload">
                 <br>
               <p>
                 <label>
@@ -67,20 +62,20 @@
               <div>
                   <input type="file" name="pic" accept="image/*" id="video">
                   <span></span>
-                  <input type="submit" id='vid' value="Upload"></div>
+                  </div>
                 
                 </p>
 
                 <input type="submit" value='SUBMIT' id="add_redflag">   
             </form>
         </div> 
-    </div>
+</div>
         <div class="tabcontent" id="intervention">
-<div>
+
                 <div>
-                        <form>
+                        <form id="addintervention">
                           <label >Issue</label>
-                          <input type="text" id="issue"  placeholder="What issue are you referring to?">
+                          <input type="text" id="intervention_comment"  placeholder="What issue are you referring to?">
                       <br>
                           <label>Region </label>
                          
@@ -97,9 +92,6 @@
                           <input type="text" pattern="-?\d{1,3}\.\d+" id="intervention_location_latitude">
                           <input type="text" pattern="-?\d{1,3}\.\d+" id="intervention_location_longitude">
 
-                          <input type="text" placeholder="Write Latitude here" id="lat" >
-                          <input type="text" placeholder="Write Longitude here" id="long"> 
-                          
                           <br>
                           <label>Agency</label>
                           <select id="agency">
@@ -110,172 +102,62 @@
                           <br>
                         
                           <label>
-                          Attach Image/Video
+                          Attach Image
                           </label>
-                        
                             <div>
-                          <input type="file" name="pic" accept="image/*" id="image_path">
+
+                          <input type="file" name="pic" accept="image/*" id="image_path" multiple>
                           <span></span>
-                          <input type="submit" id="upload" value="Upload">
-                      </div>
-                  
+                         
+                          <br>
+                        <p>
+                          <label>
+                          Attach Video
+                          </label>
+                        <div>
+                            <input type="file" name="pic" accept="image/*" id="video_path">
+                            <span></span>
+                        </div>
+                                                   
+                          </p>
+                          <input type="submit" value="Submit" id="completeintervention">
+
                         </form>
-                        <input type="submit" value="Submit">
-                      </div> 
+                      </div>
+
         </div>
-        </div>
+
         <div class="container" id="map-block">  
             <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.7469267709002!2d32.58938551425394!3d0.34276089974992735!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x177dbbae66ee50d7%3A0xcb984cde3aba1954!2sAndela+Uganda+Limited!5e0!3m2!1sen!2sus!4v1543174070721" ></iframe>                          
       </div> 
-        <div class="tabcontent" id="records">
-
-            <label onclick="show('redflagrecords');">Red-flags</label>
-            
-            <div >
-              <table id='redflagrecords'>
-                <tr>
-                <th>Title</th>
-                <th>Details</th>
-                <th>Created on</th>
-                <th>Status</th>
-                <th></th>
-                </tr>
-                <tr id="redflag1">
-                  <td>Bribery</td>
-                  <td> LC chairman asks for bribes to sign documents.
-                      <div id="alert">
-                        <span class="closebutton" onclick="this.parentElement.style.display='none';">&times;l</span>
-                        <strong>You cannot edit a resolved red flag</strong></div>
-                  </td>
-                  
-                  <td>20/10/2017</td>
-                  <td>Resolved</td>
-                  <td><span onclick="show('alert');">Edit record </span> </td>
-                  <td> <span onclick="show('redflag1');">Delete</span></td>
-                </tr>
-                <tr id="redflag2">
-                  <td>Drug abuse</td>
-                  <td> Nusrse sells free medication to desperate patients.
-                      <div id="alert1">
-                          <span class="closebutton" onclick="this.parentElement.style.display='none';">&times;l</span>
-                          <strong>Red flag under investigation</strong></div> 
-                  </td>
-                  <td>16/06/2018</td>
-                  <td>Under Investigation</td>
-                  <td>
-                      <span onclick="show('alert1');">Edit record </span>  
-                  </td>
-                  <td><span onclick="show('redflag2');">Delete</span></td>
-                </tr>
-                <tr id="redflag3">
-                  <td>Misappropriated funds</td>
-                  <td>Town council misappropriated funds
-                  <div id="edit"><textarea>Edit record here</textarea>
-                    <a onclick="this.parentElement.style.display='none';">Done editing</a></div></td>
-                  <td>10/10/2018</td>
-                  <td>Draft</td>
-                  <td><span onclick="show('edit');">Edit record </span>
-                  </td>
-                      <td><span onclick="show('redflag3');">Delete</span></td>
-                </tr>
-              </table>        
-                    </ol>
-                    <p>Summary</p>
-                    <ul>
-                      <li>3 Red-flags resolved</li>
-                      <li> 0 Red-flags rejected</li>
-                      <li>1 Red-flags under investigation</li>
-                    </ul>
-
-                    </div>
-    <br>
-                  <label onclick="show('interventionrecords');">Intervention records</label>
-                  <table id="editintervention">
-                      <tr>
-                          <th>Issue</th>
-                          <th>Region</th>
-                          <th>Agency</th>
-                          <th>Creation Date</th>
-                        </tr>
-                        
-                      <tr>
-                          <td> 
-                           <input type="text" id="issue" placeholder="Edit issue here">
-                           
-                           </td>
-                           <td>
-                           <select id="region">
-                               <option value="Eastern">Eastern Region</option>
-                               <option value="Western">Western Region</option>
-                               <option value="Central">Central Region</option>
-                               <option value="Northern">Northern Region</option>
-                               <option value="Southern">Southern Region</option>
-                             </select>
-                           </td>
-                           <td>
-                           
-                           <select id="agency">
-                               <option value="works">Ministry of Works and transport</option>
-                               <option value="labour">Ministry of Labour and Gender </option>
-                               <option value="internal">Ministry of Internal Affairs</option>
-                             </select>
-                             </td>
-                             <td><input type="date"></td>
-
-                           <td>
-                           <span onclick="show('editintervention');">Submit</span>
-                       </tr>
-                  </table>
-                  <table id='interventionrecords'>
-                          <tr>
-                            <th>Issue</th>
-                            <th>Region</th>
-                            <th>Agency</th>
-                            <th>Creation Date</th>
-                            <th>Status</th>
-                          </tr>
-                          
-                          <tr id="row1">
-                            <td>Fix deep pot holes on jinja road</td>
-                            <td>Eastern Region</td>
-                            <td>Ministry of Works and Transport</td>
-                            <td>06/01/2018</td>
-                            <td> <strong>Draft</strong></td>
-                            <td><span onclick="show('editintervention');">Edit record </span>
-                           
-
-                        <td><span onclick="show('row1');">Delete</span></td>
-                          </tr>
-                          
-                          <tr id="row2">
-                            <td>Restock essential medication at Center 4(Kyotera-Rakai). </td>
-                            <td>Central Region</td>
-                            <td>Ministry of Health</td>
-                            <td>01/25/2018</td>
-                            <td><strong>Under investigation</strong></td>
-                            <td><span onclick="show('editinterventioninvestigation');">Edit record </span>
-                              <div id="editinterventioninvestigation">
-                                <span class="closebutton" onclick="this.parentElement.style.display='none';">&times;l</span>
-                                <strong>You cannot edit an intervention under investigation</strong></div>
-                        </td>                        
-                             <td><span onclick="show('row2');">Delete</span></td>
-                          </tr>
-                          <tr id="row3">
-                            <td>Primary schools in Lango have only 5 teachers for  over 1000 pupils</td>
-                            <td>Northern Region</td>
-                            <td>Ministry of Education and Sports</td>
-                            <td>09/01/2017</td>
-                            <td><strong>Resolved</strong></td>
-                            <td><span onclick="show('editinterventionresolved');">Edit record </span>
-                              <div id="editinterventionresolved">
-                                  <span class="closebutton" onclick="this.parentElement.style.display='none';">&times;l</span>
-                                  <strong>You cannot edit a resolved intervention</strong></div>                           
-                        </td>                         
-                            <td><span onclick="show('row3');">Delete</span></td>
-                          </tr>
-                        </table>
-                        
-        </div>
     </div>
-    </body>
-    </html>
+        <div class="tabcontent" id="recordrf" >
+          <div id="output" style="overflow-x:auto;">
+            
+          </div>
+        </div>
+          <div class="tabcontent" id="recordintven" >        
+              <div id="output1" ></div>        
+              <div class="modal" id="editsection">       
+            
+                  <input type="text" id="modify-id" placeholder="Enter id of record">
+                    <label>Geolocation</label>
+                    <span onclick="getLocation();">Pick cordinates</span>
+                    <p type="text" id='intervention_combined_location'> </p>
+                    
+                    <p>Latitude:<input type="text" pattern="-?\d{1,3}\.\d+" id="edit_location_latitude"></p>
+                    <p>Longitude:<input type="text" pattern="-?\d{1,3}\.\d+" id="edit_location_longitude"></p>
+
+              <input type="submit" id="save_edits"  value="Done editing">
+               
+            </div>
+            </div> 
+             
+        
+
+    <script src="../static/js/incident.js"></script>
+    <script src="../static/js/get_incidents.js"></script>
+    <script src="../static/js/edit_incidents.js"></script>
+  
+  </body>
+</html>
