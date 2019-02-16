@@ -33,14 +33,14 @@ function signUp(event){
     fetch(url,options)
     .then((response) => response.json())
         .then((data) => {
-            if (data.status == "OK"){
-                invalid.textContent = '' + data.message
+            if (data.status === 201){
+               alert("Signup successful")
                 window.location.replace('./index.htm')
             }else{
-                invalid.textContent = ''+data.message
+                textContent = ''+data.error+' '+data.data
+                alert(textContent);
             }
             
             console.log(data)
         })
-        .catch((error) => console.log(error), invalid.textContent = "Ooops. Something went wrong");
     }

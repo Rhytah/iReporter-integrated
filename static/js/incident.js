@@ -10,6 +10,7 @@ let comment  = document.getElementById('comment')
 
 let invalid = document.getElementById('invalid')
 
+
 function addRedflag(event){
     event.preventDefault()
     let redflag ={
@@ -30,15 +31,20 @@ fetch(redflag_url,{
 .then ((response) => response.json())
     .then((data) => {
         if(data.message === 'Successfully added red-flag'){
-            invalid.textContent = '' + data.message
+            alert('Successfully added red-flag');
             window.location.reload()
+            alert(data.message)
         }else{
-            invalid.textContent = '' + data.message
+            textContent = '' + data.error
+            
+            alert(textContent);
         }
-        console.log(data)
     })
-    .catch((err) => console.log(err), invalid.textContent = "something went wrong")
 }
+    //     console.log(data)
+    // })
+    // .catch((err) => console.log(err), invalid.textContent = "something went wrong")
+// }
 
 // intervention
 const intervention_form= document.getElementById('addintervention');
@@ -52,7 +58,8 @@ let intervention_location_longitude = document.getElementById('intervention_loca
 
 const intervention_url = 'https://rhytah-ireporterv2.herokuapp.com/api/v2/interventions/'
 
-var x = document.getElementById('intervention_combined_location');
+
+let x = document.getElementById('intervention_combined_location');
 
 function getLocation() {
   if (navigator.geolocation) {
@@ -89,12 +96,13 @@ fetch(intervention_url,{
 .then ((response) => response.json())
     .then((data) => {
         if(data.message === 'Successfully added intervention'){
-            invalid.textContent = '' + data.message
+            alert(data.message);
             window.location.reload()
         }else{
-            invalid.textContent = '' + data.message
+            alert(data.error);
         }
         console.log(data)
+
     })
-    .catch((err) => console.log(err), invalid.textContent = "something went wrong")
+    .catch((err) => console.log(err));
 }
