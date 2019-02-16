@@ -24,7 +24,7 @@ class Redflag:
         return result
 
     def delete_redflag(self,redflag_id):
-        del_cmd="DELETE FROM redflags WHERE redflag_id={}".format(redflag_id)
+        del_cmd="DELETE FROM redflags WHERE redflag_id='{}';".format(redflag_id)
         deleted=db.cursor.rowcount
         db.cursor.execute(del_cmd)
         return deleted

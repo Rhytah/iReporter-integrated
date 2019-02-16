@@ -33,6 +33,7 @@ fetch(redflag_url,{
         if(data.message === 'Successfully added red-flag'){
             alert('Successfully added red-flag');
             window.location.reload()
+            alert(data.message)
         }else{
             textContent = '' + data.error
             
@@ -56,6 +57,7 @@ let intervention_location_latitude = document.getElementById('intervention_locat
 let intervention_location_longitude = document.getElementById('intervention_location_longitude');
 
 const intervention_url = 'https://rhytah-ireporterv2.herokuapp.com/api/v2/interventions/'
+
 
 let x = document.getElementById('intervention_combined_location');
 
@@ -100,6 +102,7 @@ fetch(intervention_url,{
             alert(data.error);
         }
         console.log(data)
+
     })
     .catch((err) => console.log(err));
 }

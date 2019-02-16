@@ -130,17 +130,25 @@ button {
 .modal {
   display: none; 
   position: fixed; /* Stay in place */
-  /* z-index: 1; */
+  z-index: 1;
    /* Sit on top */
   left: 0;
   top: 0;
   margin: auto;
-  width: 50%; 
-  height: 40%; 
+  width: 60%; 
+  height: fit-content; 
   position: center;
   overflow: auto; /* Enable scroll if needed */
-  /* background-color: #1a1c1f; */
+  background-color: #0c0e0fda;
   padding-top: 10px;
+}
+.close {
+  position: absolute;
+  right: 35px;
+  top: 15px;
+  font-size: 40px;
+  font-weight: bold;
+  color: goldenrod;
 }
 
 /* Modal Content/Box */
@@ -155,7 +163,11 @@ button {
 #editsection input{
   height:20px;
 }
-
+#modifybtns{
+  cursor: pointer;
+  font-family: cursive;
+  
+}
 
 #red-flag{
   color:#F0F3F4;
@@ -170,7 +182,7 @@ button {
   border-radius: 4px;
   box-sizing: border-box;
 }
-#unseenid{
+#unseenid, #no_show_col{
   display: none;
 }
 

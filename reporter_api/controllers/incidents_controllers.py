@@ -50,7 +50,7 @@ class IncidentsController:
             })
         return jsonify({
             "status":404,
-            "error":"These are no found red-flags"
+            "error":"There are no found red-flags"
         })
     def fetch_specific_redflag(self,redflag_id):
         redflag=redflag_obj.get_redflag(redflag_id)

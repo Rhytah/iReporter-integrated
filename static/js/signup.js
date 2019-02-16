@@ -33,8 +33,8 @@ function signUp(event){
     fetch(url,options)
     .then((response) => response.json())
         .then((data) => {
-            if (data.status == 200){
-               alert(data.message)
+            if (data.status === 201){
+               alert("Signup successful")
                 window.location.replace('./index.htm')
             }else{
                 textContent = ''+data.error+' '+data.data
