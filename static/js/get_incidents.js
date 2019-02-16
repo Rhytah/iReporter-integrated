@@ -48,6 +48,12 @@ function refreshRedflags(){
       
             });
             document.getElementById('output').innerHTML = output;
+            let a_redflag=redflags['redflag_id'];
+            localStorage.setItem("single_redflag",a_redflag);
+            let posted_intervention= localStorage.getItem("single_redflag");
+            let posted_redcomment=redflag['comment'];
+            localStorage.setItem("resultredflag_comment", posted_redcomment);
+            console.log(posted_redcomment)
             
         }
         alert(data.error)
@@ -144,8 +150,6 @@ function getOneRecord() {
 
 
 function modifyLocation(event){
-
-    
     let required_id = localStorage.getItem("single_intervention");
         
     let lat =document.getElementById('edit_location_latitude').value;
