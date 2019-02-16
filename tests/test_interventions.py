@@ -263,4 +263,3 @@ class IncidentTestCase(BaseTestCase):
         response_out = json.loads(response.data.decode())
         self.assertEqual(response.status_code, 200)
         self.assertIn('comment is missing',response_out['error']) 
-
