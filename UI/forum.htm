@@ -136,29 +136,9 @@
     </div>
         <div class="tabcontent" id="recordrf" >
           <div id="output" style="overflow-x:auto;">
+            
           </div>
-
-          <div class="modal" id="editsection1">   
-            <span onclick="document.getElementById('editsection1').style.display='none'" class="close" title="Close Modal">&times;</span>
-   
-           <form>
-             <h2>Make changes to record</h2>
-                   <label>Geolocation</label>
-                                    
-                   <p>Latitude:<input type="text" pattern="-?\d{1,3}\.\d+" id="edit_location_latitude_redflag"></p>
-                   <p>Longitude:<input type="text" pattern="-?\d{1,3}\.\d+" id="edit_location_longitude_redflag"></p>
-
-             <label>Comment</label>
-             <input type="text" id="modify-rfcomment" placeholder="edit comment">
-
-             </form>
-             <input type="submit" id="save_edits_rf"  value="Save changes">
-
-             <br>
-                <input type="submit" id="modifycomment-btn_rf" value="save new comment">
         </div>
-
-
           <div class="tabcontent" id="recordintven" >        
               <div id="output1" ></div>        
               
@@ -174,16 +154,15 @@
                        
                        <p>Latitude:<input type="text" pattern="-?\d{1,3}\.\d+" id="edit_location_latitude"></p>
                        <p>Longitude:<input type="text" pattern="-?\d{1,3}\.\d+" id="edit_location_longitude"></p>
-
+   
                  <label>Comment</label>
                  <input type="text" id="modify-icomment" placeholder="edit comment">
    
+                 <!-- <button type="submit" id="modifycomment-btn">DONE</button> -->
                  </form>
-                 <input type="submit" id="save_edits"  value="Save changes">
-
                  <br>
-                    <input type="submit" id="modifycomment-btn" value="save new comment">
-
+                 <input type="submit" id="save_edits"  value="Save changes">
+   
                </div>
                
                
@@ -192,6 +171,7 @@
 
     <script src="../static/js/incident.js"></script>
     <script src="../static/js/get_incidents.js"></script>
+    <script src="../static/js/edit_incidents.js"></script>
   
   </body>
 </html>
