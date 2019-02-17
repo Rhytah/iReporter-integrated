@@ -79,8 +79,9 @@ class IncidentsController:
             "message":"Redflag not found."
         })
 
-    def edit_location(self,lat,long,redflag_id):
+    def edit_location(self,redflag_id):
         data = request.get_json()
+        # data=json.loads(request_data)
         lat = data['lat']
         long = data['long']
         invalid_location = validator.validate_location(lat,long)
@@ -107,7 +108,7 @@ class IncidentsController:
 
         if comment:
             return jsonify({
-                "message":f"You have changed red flag's comment to{comment}"
+                "message":f"You have changed red flag's comment to {comment}"
             }),200
         return jsonify({
             "status":404,
@@ -230,4 +231,4 @@ class IncidentsController:
             }),200
         return jsonify({
             "status":404,
-            "error":"Intervention record not found."})
+"error":"Intervention record not found."})
