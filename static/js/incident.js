@@ -34,11 +34,16 @@ fetch(redflag_url,{
             alert('Successfully added red-flag');
             window.location.reload()
             alert(data.message)
-        }else{
+        }else if(data.msg ==='Token has expired'){
+            alert(data.msg + ' Please login again');
+        }
+        else{
             textContent = '' + data.error
             
             alert(textContent);
         }
+       
+
     })
 }
     //     console.log(data)
