@@ -261,7 +261,7 @@ fetch(get_redflag_url+requiredcomment_id_redflag+'/comment',{
 })
 .then (response => response.json())
 .then((data) => {
-    if(data.message ==="You have changed red flag's comment"){
+    if(data.status ==200){
         textContent = '' + data.message
         alert(textContent);
        
