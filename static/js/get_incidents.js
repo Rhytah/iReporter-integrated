@@ -7,12 +7,10 @@ document.getElementById('save_edits_rf').addEventListener('click',modifyLocation
 document.getElementById('modifycomment-btn_rf').addEventListener('click',modifyRedflagComment);
 
 function refreshRedflags(){
-    // let invalid = document.getElementById('invalid');
- 
-    fetch(get_redflag_url, {
+      fetch(get_redflag_url, {
         method: 'GET',
         mode: 'cors',
-        headers: {'Content-Type': 'application/json'}
+        headers: {'Content-Type': 'application/json','Authorization':authorization_header}
     })
     .then((response) => response.json())
     .then((data) => {
@@ -31,7 +29,6 @@ function refreshRedflags(){
                     <tbody>
                     `;
         let redflags = data["data"];
-        
         redflags.forEach(function(redflag){
 
         output +=`
@@ -79,7 +76,7 @@ function refreshInterventions(){
     fetch(get_intervention_url, {
         method: 'GET',
         mode: 'cors',
-        headers: {'Content-Type': 'application/json'}
+        headers: {'Content-Type': 'application/json', 'Authorization':authorization_header}
     })
     .then((response) => response.json())
     .then((data) => {
@@ -101,9 +98,7 @@ function refreshInterventions(){
         `;
         let interventions = data["data"];
         interventions.forEach(function(intervention){
-        output1 += `
-        
-        
+        output1 += `     
         <tr >
         <td class = "incident-item" id="comm">${intervention.comment}</td>        
         <td class = "incident-item-0">${intervention.created_on}</td>
@@ -116,25 +111,27 @@ function refreshInterventions(){
         </td>
 
         <td class = "incident-item-5">${intervention.status}</td>
-        <td id='unseenid'>${intervention.intervention_id}</td>
         <td id="modifybtns"><a onClick="show('editsection')">edit</a> |<a>delete</a>
         </td>
-        </tr>
-           
+        </tr>        
         `;
             let an_intervention=intervention['intervention_id'];
             localStorage.setItem("single_intervention",an_intervention);
+            localStorage.getItem("single_intervention")
             let posted_intervention= localStorage.getItem("single_intervention");
             let posted_icomment=intervention['comment'];
             localStorage.setItem("resultintvn_comment", posted_icomment);
             console.log(posted_intervention);
-            
+            console.log(localStorage.getItem('resultintvn_icomment'))
+            console.log(data)
+            console.log(an_intervention)
             });
-            document.getElementById('output1').innerHTML = output1;    
             alert(data.message)
+            document.getElementById('output1').innerHTML = output1;    
+            
 
         }
-        alert(data.message)
+       
              
     })
     
@@ -171,7 +168,7 @@ function modifyLocation(event){
 fetch(get_intervention_url+required_id+'/location',{
     method:'PATCH',
     mode: 'cors',
-    headers :{'Content-Type':'application/json'},
+    headers :{'Content-Type':'application/json','Authorization':authorization_header},
     body : JSON.stringify({"lat":lat, "long":long})
 })
 .then (response => response.json())
@@ -198,7 +195,7 @@ function modifyInterventionComment(event){
 fetch(get_intervention_url+requiredcomment_id+'/comment',{
     method:'PATCH',
     mode: 'cors',
-    headers :{'Content-Type':'application/json'},
+    headers :{'Content-Type':'application/json','Authorization':authorization_header},
     body : JSON.stringify({"comment":newComment})
 })
 .then (response => response.json())
@@ -228,7 +225,7 @@ function modifyLocationrf(event){
 fetch(get_redflag_url+required_id_redflag+'/location',{
     method:'PATCH',
     mode: 'cors',
-    headers :{'Content-Type':'application/json'},
+    headers :{'Content-Type':'application/json','Authorization':authorization_header},
     body : JSON.stringify({"lat":newlat, "long":newlong})
 })
 .then (response => response.json())
@@ -236,8 +233,7 @@ fetch(get_redflag_url+required_id_redflag+'/location',{
     if(data.status ===200){
         textContent = '' + data.message
         alert(textContent);
-        // document.getElementById("intervention_location_latitude").innerHTML=lat
-        // document.getElementById("intervention_location_longitude").innerHTML=long
+      
         console.log(data)
         window.location.reload()
     }else{
