@@ -1,18 +1,23 @@
 const get_redflag_url = 'https://rhytah-ireporterv2.herokuapp.com/api/v2/red-flags/'
 const get_intervention_url = 'https://rhytah-ireporterv2.herokuapp.com/api/v2/interventions/'
 document.getElementById('save_edits').addEventListener('click',modifyLocation);
+document.getElementById('modifycomment-btn').addEventListener('click',modifyInterventionComment);
 
+document.getElementById('save_edits_rf').addEventListener('click',modifyLocationrf);
+document.getElementById('modifycomment-btn_rf').addEventListener('click',modifyRedflagComment);
+// document.getElementById('delete-btn').addEventListener('click',deleteRedflag)
 
 function refreshRedflags(){
-
-      fetch(get_redflag_url, {
+    // let invalid = document.getElementById('invalid');
+ 
+    fetch(get_redflag_url, {
         method: 'GET',
         mode: 'cors',
-        headers: {'Content-Type': 'application/json','Authorization':authorization_header}
+        headers: {'Content-Type': 'application/json'}
     })
     .then((response) => response.json())
     .then((data) => {
-        if(data.message === 'These are the recorded red-flags'){
+        if(data.status === 200){
         let output =`<h2>RedFlags</h2>
         <input type="text" id="myInput" onkeyup="getOneRecord()" placeholder="Search for redflag.." title="Enter title">
                     <table id="recordtable">
@@ -27,6 +32,7 @@ function refreshRedflags(){
                     <tbody>
                     `;
         let redflags = data["data"];
+        
         redflags.forEach(function(redflag){
 
         output +=`
@@ -39,26 +45,31 @@ function refreshRedflags(){
         <td class = "incident-item-3">${redflag.lat}</td>
         <td class = "incident-item-4">${redflag.long}</td>
         <td class = "incident-item-5">${redflag.status}</td>
-        <td id="modifybtns"><a onClick="show('editsection')">edit</a> |<a>delete</a>
-
+        <td id="modifybtns"><a onClick="show('editsection1')">edit</a> <span onClick="deleteRedflag();">delete</span></td>
         </tr>
         
-        `
-      
-            });
+        `;
+        let a_redflag=redflag['redflag_id'];
+        localStorage.setItem("single_redflag",a_redflag);
+        localStorage.getItem("single_redflag");
+        let posted_redflag= localStorage.getItem("single_redflag");
+        let posted_redcomment=redflag['comment'];
+        localStorage.setItem("resultredflag_comment", posted_redcomment);
+        redcomment=localStorage.getItem("resultredflag_comment")
+        console.log(redcomment)
+        console.log(posted_redflag)
+        console.log(a_redflag)
+        });
             document.getElementById('output').innerHTML = output;
-            let a_redflag=redflags['redflag_id'];
-            localStorage.setItem("single_redflag",a_redflag);
-            let posted_intervention= localStorage.getItem("single_redflag");
-            let posted_redcomment=redflag['comment'];
-            localStorage.setItem("resultredflag_comment", posted_redcomment);
-            console.log(posted_redcomment)
-            
+            alert(data.message)
+
         }
+        
         alert(data.error)
     })
-    
 }
+    
+
 
 
 // fetch interventions
@@ -67,14 +78,13 @@ function refreshInterventions(){
     fetch(get_intervention_url, {
         method: 'GET',
         mode: 'cors',
-        headers: {'Content-Type': 'application/json', 'Authorization':authorization_header}
+        headers: {'Content-Type': 'application/json'}
     })
     .then((response) => response.json())
     .then((data) => {
-        if(data.message === 'These are the Intervention records'){
+        if(data.status === 200){
         let output1 =`<h2>Interventions</h2>
         <input type="text" id="myInput" onkeyup="getOneRecord()" placeholder="Search for intervention.." title="Enter title">
-
                 <table id="recordtable" style="overflow-x:auto;">
                 <th> ISSUE</th>
                 <th> REPORTED ON </th>
@@ -89,40 +99,36 @@ function refreshInterventions(){
         `;
         let interventions = data["data"];
         interventions.forEach(function(intervention){
-        output1 += `     
+        output1 += `
+        
+        
         <tr >
         <td class = "incident-item" id="comm">${intervention.comment}</td>        
         <td class = "incident-item-0">${intervention.created_on}</td>
         <td class = "incident-item-1">${intervention.image}</td>
         <td class = "incident-item-2">${intervention.video}</td>
-        <td class = "incident-item-3" id="modifylat">${intervention.lat}
-       
-        </td>
-        <td class = "incident-item-4" id="modifylong">${intervention.long}
-        </td>
-
+        <td class = "incident-item-3" id="modifylat">${intervention.lat}</td>
+        <td class = "incident-item-4" id="modifylong">${intervention.long}</td>
         <td class = "incident-item-5">${intervention.status}</td>
-        <td id="modifybtns"><a onClick="show('editsection')">edit</a> |<a>delete</a>
-        </td>
-        </tr>        
+        <td id='unseenid'>${intervention.intervention_id}</td>
+        <td id="modifybtns">
+        <a onClick="show('editsection')">edit</a> |
+        <span onClick="deleteIntervention();">delete</span></td>
+        </tr>
+           
         `;
             let an_intervention=intervention['intervention_id'];
             localStorage.setItem("single_intervention",an_intervention);
-            localStorage.getItem("single_intervention")
             let posted_intervention= localStorage.getItem("single_intervention");
             let posted_icomment=intervention['comment'];
             localStorage.setItem("resultintvn_comment", posted_icomment);
             console.log(posted_intervention);
-            console.log(localStorage.getItem('resultintvn_icomment'))
-            console.log(data)
-            console.log(an_intervention)
+            console.log(posted_icomment)
             });
             alert(data.message)
-            document.getElementById('output1').innerHTML = output1;    
-            
-
+            document.getElementById('output1').innerHTML = output1;   
         }
-       
+        // alert(data.error)
              
     })
     
@@ -159,7 +165,7 @@ function modifyLocation(event){
 fetch(get_intervention_url+required_id+'/location',{
     method:'PATCH',
     mode: 'cors',
-    headers :{'Content-Type':'application/json','Authorization':authorization_header},
+    headers :{'Content-Type':'application/json'},
     body : JSON.stringify({"lat":lat, "long":long})
 })
 .then (response => response.json())
@@ -167,9 +173,7 @@ fetch(get_intervention_url+required_id+'/location',{
     if(data.message ==="You have changed intervention's location"){
         textContent = '' + data.message
         alert(textContent);
-        document.getElementById("intervention_location_latitude").innerHTML=lat
-        document.getElementById("intervention_location_longitude").innerHTML=long
-        console.log(data)
+           console.log(data)
         window.location.reload()
     }else{
         alert(data.error)
@@ -188,7 +192,7 @@ function modifyInterventionComment(event){
 fetch(get_intervention_url+requiredcomment_id+'/comment',{
     method:'PATCH',
     mode: 'cors',
-    headers :{'Content-Type':'application/json','Authorization':authorization_header},
+    headers :{'Content-Type':'application/json'},
     body : JSON.stringify({"comment":newComment})
 })
 .then (response => response.json())
@@ -218,7 +222,7 @@ function modifyLocationrf(event){
 fetch(get_redflag_url+required_id_redflag+'/location',{
     method:'PATCH',
     mode: 'cors',
-    headers :{'Content-Type':'application/json','Authorization':authorization_header},
+    headers :{'Content-Type':'application/json'},
     body : JSON.stringify({"lat":newlat, "long":newlong})
 })
 .then (response => response.json())
@@ -226,7 +230,8 @@ fetch(get_redflag_url+required_id_redflag+'/location',{
     if(data.status ===200){
         textContent = '' + data.message
         alert(textContent);
-      
+        document.getElementById("intervention_location_latitude").innerHTML=lat
+        document.getElementById("intervention_location_longitude").innerHTML=long
         console.log(data)
         window.location.reload()
     }else{
@@ -265,3 +270,48 @@ fetch(get_redflag_url+requiredcomment_id_redflag+'/comment',{
 })
 
 }
+
+
+function deleteRedflag(){
+    let delete_id_redflag = localStorage.getItem("single_redflag");
+    console.log(delete_id_redflag)
+    
+    deleteurl=(get_redflag_url+delete_id_redflag+'/')
+    console.log(deleteurl)
+    fetch(deleteurl, {
+        method: 'DELETE',
+        mode: 'cors',
+        headers: {'Content-Type': 'application/json', 'Authorization':authorization_header}
+    })
+    .then((response) => response.json())
+        .then((data) => {
+            if (data.status ===200){
+                console.log(data)
+                alert(data.message)
+            }else{
+                alert(data.error)
+            }
+        })
+    }
+
+    function deleteIntervention(){
+        let delete_id_intervention = localStorage.getItem("single_intervention");
+        console.log(delete_id_intervention)
+        
+        let deleteurl2=(get_intervention_url+delete_id_intervention)
+        console.log(deleteurl2)
+        fetch(deleteurl2, {
+            method: 'DELETE',
+            mode: 'cors',
+            headers: {'Content-Type': 'application/json', 'Authorization':authorization_header}
+        })
+        .then((response) => response.json())
+            .then((data) => {
+                if (data.status ===200){
+                    alert("You are permanently deleting this intervention record")
+                    alert(data.message)
+                }else{
+                    alert(data.error)
+                }
+            })
+        }
