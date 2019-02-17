@@ -1,10 +1,13 @@
 const get_redflag_url = 'https://rhytah-ireporterv2.herokuapp.com/api/v2/red-flags/'
 const get_intervention_url = 'https://rhytah-ireporterv2.herokuapp.com/api/v2/interventions/'
 document.getElementById('save_edits').addEventListener('click',modifyLocation);
+document.getElementById('modifycomment-btn').addEventListener('click',modifyInterventionComment);
 
+document.getElementById('save_edits_rf').addEventListener('click',modifyLocationrf);
+document.getElementById('modifycomment-btn_rf').addEventListener('click',modifyRedflagComment);
 
 function refreshRedflags(){
-    let invalid = document.getElementById('invalid');
+    // let invalid = document.getElementById('invalid');
  
     fetch(get_redflag_url, {
         method: 'GET',
@@ -13,7 +16,7 @@ function refreshRedflags(){
     })
     .then((response) => response.json())
     .then((data) => {
-        if(data.message === 'These are the recorded red-flags'){
+        if(data.status === 200){
         let output =`<h2>RedFlags</h2>
         <input type="text" id="myInput" onkeyup="getOneRecord()" placeholder="Search for redflag.." title="Enter title">
                     <table id="recordtable">
@@ -28,6 +31,7 @@ function refreshRedflags(){
                     <tbody>
                     `;
         let redflags = data["data"];
+        
         redflags.forEach(function(redflag){
 
         output +=`
@@ -40,26 +44,33 @@ function refreshRedflags(){
         <td class = "incident-item-3">${redflag.lat}</td>
         <td class = "incident-item-4">${redflag.long}</td>
         <td class = "incident-item-5">${redflag.status}</td>
-        <td id="modifybtns"><a onClick="show('editsection')">edit</a> |<a>delete</a>
+        <td id="modifybtns"><a onClick="show('editsection1')">edit</a> |<a>delete</a>
 
         </tr>
         
-        `
-      
-            });
+        `;
+        let a_redflag=redflag['redflag_id'];
+        localStorage.setItem("single_redflag",a_redflag);
+        localStorage.getItem("single_redflag");
+        let posted_redflag= localStorage.getItem("single_redflag");
+        let posted_redcomment=redflag['comment'];
+        localStorage.setItem("resultredflag_comment", posted_redcomment);
+        redcomment=localStorage.getItem("resultredflag_comment")
+        console.log(redcomment)
+        console.log(posted_redflag)
+        console.log(a_redflag)
+        });
             document.getElementById('output').innerHTML = output;
-            let a_redflag=redflags['redflag_id'];
-            localStorage.setItem("single_redflag",a_redflag);
-            let posted_intervention= localStorage.getItem("single_redflag");
-            let posted_redcomment=redflag['comment'];
-            localStorage.setItem("resultredflag_comment", posted_redcomment);
-            console.log(posted_redcomment)
-            
+            alert(data.message)
+            console.log(data)
+
         }
+        
         alert(data.error)
     })
-    
 }
+    
+
 
 
 // fetch interventions
@@ -72,7 +83,7 @@ function refreshInterventions(){
     })
     .then((response) => response.json())
     .then((data) => {
-        if(data.message === 'These are the Intervention records'){
+        if(data.status === 200){
         let output1 =`<h2>Interventions</h2>
         <input type="text" id="myInput" onkeyup="getOneRecord()" placeholder="Search for intervention.." title="Enter title">
 
@@ -120,8 +131,10 @@ function refreshInterventions(){
             
             });
             document.getElementById('output1').innerHTML = output1;    
+            alert(data.message)
+
         }
-        alert(data.error)
+        alert(data.message)
              
     })
     
@@ -166,8 +179,6 @@ fetch(get_intervention_url+required_id+'/location',{
     if(data.message ==="You have changed intervention's location"){
         textContent = '' + data.message
         alert(textContent);
-        document.getElementById("intervention_location_latitude").innerHTML=lat
-        document.getElementById("intervention_location_longitude").innerHTML=long
         console.log(data)
         window.location.reload()
     }else{
@@ -177,3 +188,91 @@ fetch(get_intervention_url+required_id+'/location',{
 
 }
 
+
+function modifyInterventionComment(event){
+    let requiredcomment_id = localStorage.getItem("single_intervention");
+        
+    let newComment =document.getElementById('modify-icomment').value;
+    console.log(requiredcomment_id)
+    console.log(newComment)
+fetch(get_intervention_url+requiredcomment_id+'/comment',{
+    method:'PATCH',
+    mode: 'cors',
+    headers :{'Content-Type':'application/json'},
+    body : JSON.stringify({"comment":newComment})
+})
+.then (response => response.json())
+.then((data) => {
+    if(data.status ===200){
+        textContent = '' + data.message
+        alert(textContent);
+       
+        console.log(data)
+        window.location.reload()
+    }else{
+        alert(data.error)
+    }
+})
+
+}
+
+// redflags
+
+
+function modifyLocationrf(event){
+    let required_id_redflag = localStorage.getItem("single_redflag");
+        
+    let newlat =document.getElementById('edit_location_latitude_redflag').value;
+    let newlong =document.getElementById('edit_location_longitude_redflag').value;
+    
+fetch(get_redflag_url+required_id_redflag+'/location',{
+    method:'PATCH',
+    mode: 'cors',
+    headers :{'Content-Type':'application/json'},
+    body : JSON.stringify({"lat":newlat, "long":newlong})
+})
+.then (response => response.json())
+.then((data) => {
+    if(data.status ===200){
+        textContent = '' + data.message
+        alert(textContent);
+        // document.getElementById("intervention_location_latitude").innerHTML=lat
+        // document.getElementById("intervention_location_longitude").innerHTML=long
+        console.log(data)
+        window.location.reload()
+    }else{
+        alert(data.error)
+    }
+})
+
+}
+
+
+function modifyRedflagComment(event){
+    let requiredcomment_id_redflag = localStorage.getItem("single_redflag");
+        
+    let newCommentredflag =document.getElementById('modify-rfcomment').value;
+    // console.log(requiredcomment_id_red)
+    console.log(newCommentredflag)
+fetch(get_redflag_url+requiredcomment_id_redflag+'/comment',{
+    method:'PATCH',
+    mode: 'cors',
+    headers :{'Content-Type':'application/json'},
+    body : JSON.stringify({"comment":newCommentredflag})
+})
+.then (response => response.json())
+.then((data) => {
+    if(data.status ==200){
+        textContent = '' + data.message
+        alert(textContent);
+       
+        console.log(data)
+        console.log(requiredcomment_id_redflag)
+        console.log(redcomment)
+        window.location.reload()
+    }else{
+        alert(data.error)
+    }
+})
+
+}
