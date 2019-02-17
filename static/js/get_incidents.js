@@ -62,6 +62,7 @@ function refreshRedflags(){
         });
             document.getElementById('output').innerHTML = output;
             alert(data.message)
+            console.log(data)
 
         }
         
@@ -178,8 +179,6 @@ fetch(get_intervention_url+required_id+'/location',{
     if(data.message ==="You have changed intervention's location"){
         textContent = '' + data.message
         alert(textContent);
-        // document.getElementById("intervention_location_latitude").innerHTML=lat
-        // document.getElementById("intervention_location_longitude").innerHTML=long
         console.log(data)
         window.location.reload()
     }else{
