@@ -20,8 +20,7 @@ sqlcommands = (
                     created_on TIMESTAMP,
                     image VARCHAR(30),
                     video VARCHAR (30),
-                    lat FLOAT8,
-                    long FLOAT8, 
+                    location FLOAT8, 
                     status VARCHAR (15),
                     comment VARCHAR (225)
                     )
@@ -31,8 +30,7 @@ sqlcommands = (
                     intervention_id SERIAL PRIMARY KEY,
                     created_by INT REFERENCES users(userid),
                     created_on TIMESTAMP,
-                    lat FLOAT8,
-                    long FLOAT8, 
+                    location FLOAT8,
                     image VARCHAR(30),
                     video VARCHAR (30),
                     status VARCHAR(15),

@@ -174,7 +174,7 @@ class IncidentTestCase(BaseTestCase):
             headers=headers,
             content_type='application/json'
         )
-        new_value=dict(lat=12.3548,long=45.592)
+        new_value=dict(location=15.369)
         response = self.test_client.patch('/api/v2/interventions/1/location',
                                         content_type='application/json',
                                         data=json.dumps(new_value))
@@ -183,7 +183,7 @@ class IncidentTestCase(BaseTestCase):
         self.assertIn("You have changed intervention's location",response_out['message'])
     
     def test_modify_interventionlocation_out_of_range(self):
-        new_value=dict(lat=12.3548,long=45.592)
+        new_value=dict(location=12.3548)
         response = self.test_client.patch('/api/v2/interventions/1/location',
                                         content_type='application/json',
                                         data=json.dumps(new_value))
@@ -192,23 +192,22 @@ class IncidentTestCase(BaseTestCase):
         self.assertIn("Intervention record not found.",response_out['error']) 
 
     def test_modify_interventionlocation_invalid_data(self):
-        new_value=dict(lat="12.3548",long="dbjcu")
+        new_value=dict(location="12.3548")
         response = self.test_client.patch('/api/v2/interventions/1/location',
                                         content_type='application/json',
                                         data=json.dumps(new_value))
         response_out = json.loads(response.data.decode())
         self.assertEqual(response.status_code, 200)
-        self.assertIn('latitute must be a float value',response_out['error']) 
+        self.assertIn('location must be a float value',response_out['error']) 
     
     def test_modify_interventionlocation_missing_data(self):
-        new_value=dict(lat="",long="")
+        new_value=dict(location="")
         response = self.test_client.patch('/api/v2/interventions/1/location',
                                         content_type='application/json',
                                         data=json.dumps(new_value))
         response_out = json.loads(response.data.decode())
         self.assertEqual(response.status_code, 200)
-        self.assertIn('latitude is missing',response_out['error']) 
-        
+        self.assertIn('location is missing',response_out['error']) 
 
 
     def test_modify_interventioncomment(self):
@@ -264,3 +263,4 @@ class IncidentTestCase(BaseTestCase):
         response_out = json.loads(response.data.decode())
         self.assertEqual(response.status_code, 200)
         self.assertIn('comment is missing',response_out['error']) 
+
