@@ -108,7 +108,7 @@ class IncidentsController:
 
         if comment:
             return jsonify({
-                "message":"You have changed red flag's comment"
+                "message":f"You have changed red flag's comment to {comment}"
             }),200
         return jsonify({
             "status":404,
