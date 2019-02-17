@@ -82,7 +82,7 @@ function refreshInterventions(){
     })
     .then((response) => response.json())
     .then((data) => {
-        if(data.message === 'These are the Intervention records'){
+        if(data.status === 200){
         let output1 =`<h2>Interventions</h2>
         <input type="text" id="myInput" onkeyup="getOneRecord()" placeholder="Search for intervention.." title="Enter title">
 
@@ -130,8 +130,10 @@ function refreshInterventions(){
             
             });
             document.getElementById('output1').innerHTML = output1;    
+            alert(data.message)
+
         }
-        alert(data.error)
+        alert(data.message)
              
     })
     
