@@ -13,6 +13,7 @@ def create_app(mode):
         app.config.from_object(app_configuration)
 
         app.config['JWT_SECRET_KEY'] = 'super-secret'
+        app.config['JWT_ACCESS_TOKEN_EXPIRES'] =False
         jwt = JWTManager(app)
         CORS(app)
 
