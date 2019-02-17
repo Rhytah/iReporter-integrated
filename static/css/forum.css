@@ -130,7 +130,7 @@ button {
 .modal {
   display: none; 
   position: fixed; /* Stay in place */
-  z-index: 1;
+  z-index: inherit;
    /* Sit on top */
   left: 0;
   top: 0;
@@ -163,9 +163,13 @@ button {
 #editsection input{
   height:20px;
 }
-#modifybtns{
+#modifybtns,#modifycomment-btn_rf,#save_edits,#modifycomment-btn,#save_edits_rf{
   cursor: pointer;
   font-family: cursive;
+  height:fit-content;
+  width:fit-content;
+  font-weight: bolder;
+  color: crimson;
   
 }
 

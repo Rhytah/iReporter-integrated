@@ -4,12 +4,11 @@ document.getElementById('save_edits').addEventListener('click',modifyLocation);
 
 
 function refreshRedflags(){
-    let invalid = document.getElementById('invalid');
- 
-    fetch(get_redflag_url, {
+
+      fetch(get_redflag_url, {
         method: 'GET',
         mode: 'cors',
-        headers: {'Content-Type': 'application/json'}
+        headers: {'Content-Type': 'application/json','Authorization':authorization_header}
     })
     .then((response) => response.json())
     .then((data) => {
@@ -68,7 +67,7 @@ function refreshInterventions(){
     fetch(get_intervention_url, {
         method: 'GET',
         mode: 'cors',
-        headers: {'Content-Type': 'application/json'}
+        headers: {'Content-Type': 'application/json', 'Authorization':authorization_header}
     })
     .then((response) => response.json())
     .then((data) => {
@@ -90,9 +89,7 @@ function refreshInterventions(){
         `;
         let interventions = data["data"];
         interventions.forEach(function(intervention){
-        output1 += `
-        
-        
+        output1 += `     
         <tr >
         <td class = "incident-item" id="comm">${intervention.comment}</td>        
         <td class = "incident-item-0">${intervention.created_on}</td>
@@ -105,23 +102,27 @@ function refreshInterventions(){
         </td>
 
         <td class = "incident-item-5">${intervention.status}</td>
-        <td id='unseenid'>${intervention.intervention_id}</td>
         <td id="modifybtns"><a onClick="show('editsection')">edit</a> |<a>delete</a>
         </td>
-        </tr>
-           
+        </tr>        
         `;
             let an_intervention=intervention['intervention_id'];
             localStorage.setItem("single_intervention",an_intervention);
+            localStorage.getItem("single_intervention")
             let posted_intervention= localStorage.getItem("single_intervention");
             let posted_icomment=intervention['comment'];
             localStorage.setItem("resultintvn_comment", posted_icomment);
             console.log(posted_intervention);
-            
+            console.log(localStorage.getItem('resultintvn_icomment'))
+            console.log(data)
+            console.log(an_intervention)
             });
+            alert(data.message)
             document.getElementById('output1').innerHTML = output1;    
+            
+
         }
-        alert(data.error)
+       
              
     })
     
@@ -158,7 +159,7 @@ function modifyLocation(event){
 fetch(get_intervention_url+required_id+'/location',{
     method:'PATCH',
     mode: 'cors',
-    headers :{'Content-Type':'application/json'},
+    headers :{'Content-Type':'application/json','Authorization':authorization_header},
     body : JSON.stringify({"lat":lat, "long":long})
 })
 .then (response => response.json())
@@ -177,3 +178,90 @@ fetch(get_intervention_url+required_id+'/location',{
 
 }
 
+
+function modifyInterventionComment(event){
+    let requiredcomment_id = localStorage.getItem("single_intervention");
+        
+    let newComment =document.getElementById('modify-icomment').value;
+    console.log(requiredcomment_id)
+    console.log(newComment)
+fetch(get_intervention_url+requiredcomment_id+'/comment',{
+    method:'PATCH',
+    mode: 'cors',
+    headers :{'Content-Type':'application/json','Authorization':authorization_header},
+    body : JSON.stringify({"comment":newComment})
+})
+.then (response => response.json())
+.then((data) => {
+    if(data.status ===200){
+        textContent = '' + data.message
+        alert(textContent);
+       
+        console.log(data)
+        window.location.reload()
+    }else{
+        alert(data.error)
+    }
+})
+
+}
+
+// redflags
+
+
+function modifyLocationrf(event){
+    let required_id_redflag = localStorage.getItem("single_redflag");
+        
+    let newlat =document.getElementById('edit_location_latitude_redflag').value;
+    let newlong =document.getElementById('edit_location_longitude_redflag').value;
+    
+fetch(get_redflag_url+required_id_redflag+'/location',{
+    method:'PATCH',
+    mode: 'cors',
+    headers :{'Content-Type':'application/json','Authorization':authorization_header},
+    body : JSON.stringify({"lat":newlat, "long":newlong})
+})
+.then (response => response.json())
+.then((data) => {
+    if(data.status ===200){
+        textContent = '' + data.message
+        alert(textContent);
+      
+        console.log(data)
+        window.location.reload()
+    }else{
+        alert(data.error)
+    }
+})
+
+}
+
+
+function modifyRedflagComment(event){
+    let requiredcomment_id_redflag = localStorage.getItem("single_redflag");
+        
+    let newCommentredflag =document.getElementById('modify-rfcomment').value;
+    // console.log(requiredcomment_id_red)
+    console.log(newCommentredflag)
+fetch(get_redflag_url+requiredcomment_id_redflag+'/comment',{
+    method:'PATCH',
+    mode: 'cors',
+    headers :{'Content-Type':'application/json'},
+    body : JSON.stringify({"comment":newCommentredflag})
+})
+.then (response => response.json())
+.then((data) => {
+    if(data.status ==200){
+        textContent = '' + data.message
+        alert(textContent);
+       
+        console.log(data)
+        console.log(requiredcomment_id_redflag)
+        console.log(redcomment)
+        window.location.reload()
+    }else{
+        alert(data.error)
+    }
+})
+
+}

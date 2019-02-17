@@ -80,8 +80,7 @@ class IncidentsController:
         })
 
     def edit_location(self,lat,long,redflag_id):
-        request_data = request.data
-        data=json.loads(request_data)
+        data = request.get_json()
         lat = data['lat']
         long = data['long']
         invalid_location = validator.validate_location(lat,long)
