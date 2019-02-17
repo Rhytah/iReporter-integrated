@@ -40,7 +40,7 @@ def edit_location(redflag_id):
     data = request.get_json()
     lat = data['lat']
     long = data['long']
-    return incidents_controller.edit_location(redflag_id)
+    return incidents_controller.edit_location(lat,long,redflag_id)
 
 
 @incident.route('/api/v2/red-flags/<int:redflag_id>/comment/', methods=['PATCH'])
