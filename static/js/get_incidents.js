@@ -44,7 +44,10 @@ function refreshRedflags(){
         <td class = "incident-item-3">${redflag.lat}</td>
         <td class = "incident-item-4">${redflag.long}</td>
         <td class = "incident-item-5">${redflag.status}</td>
-        <td id="modifybtns"><a onClick="show('editsection1')">edit</a> |<a>delete</a>
+        <td id="modifybtns"><a onClick="show('editsection1')"><img src="../static/images/edit.png" height="30px" width="30px"></a> 
+        <span onClick="deleteRedflag(${redflag.redflag_id});"><img src="../static/images/delete.png" height="30px" width="30px"></span>
+        </td>
+        <td id="unseenid">${redflag.redflag_id}</td>
         </tr>
         
         `;
@@ -58,19 +61,19 @@ function refreshRedflags(){
         console.log(redcomment)
         console.log(posted_redflag)
         console.log(a_redflag)
+            
         });
             document.getElementById('output').innerHTML = output;
             alert(data.message)
-            console.log(data)
-
+           
+          
+        }else{
+            alert(data.error)
         }
         
-        alert(data.error)
     })
 }
     
-
-
 
 // fetch interventions
 function refreshInterventions(){
@@ -107,31 +110,29 @@ function refreshInterventions(){
         <td class = "incident-item-0">${intervention.created_on}</td>
         <td class = "incident-item-1">${intervention.image}</td>
         <td class = "incident-item-2">${intervention.video}</td>
-        <td class = "incident-item-3" id="modifylat">${intervention.lat}
-       
-        </td>
-        <td class = "incident-item-4" id="modifylong">${intervention.long}
-        </td>
+        <td class = "incident-item-3" id="modifylat">${intervention.lat}</td>
+        <td class = "incident-item-4" id="modifylong">${intervention.long}</td>
         <td class = "incident-item-5">${intervention.status}</td>
-        <td id='unseenid'>${intervention.intervention_id}</td>
-        <td id="modifybtns"><a onClick="show('editsection')">edit</a> |<a>delete</a>
-        </td>
+        <td id="modifybtns">
+        <a onClick="show('editsection')"><img src="../static/images/edit.png" height="30px" width="30px"></a> |
+        <span onClick="deleteIntervention(${intervention.intervention_id});">
+        <img src="../static/images/delete.png" height="30px" width="30px"></span></td>
         </tr>
            
         `;
-            let an_intervention=intervention['intervention_id'];
-            localStorage.setItem("single_intervention",an_intervention);
-            let posted_intervention= localStorage.getItem("single_intervention");
-            let posted_icomment=intervention['comment'];
-            localStorage.setItem("resultintvn_comment", posted_icomment);
-            console.log(posted_intervention);
-            
+        let an_intervention=intervention['intervention_id'];
+        localStorage.setItem("single_intervention",an_intervention);
+        let posted_intervention= localStorage.getItem("single_intervention");
+        let posted_icomment=intervention['comment'];
+        localStorage.setItem("resultintvn_comment", posted_icomment);
+        console.log(posted_intervention);
             });
-            document.getElementById('output1').innerHTML = output1;    
             alert(data.message)
-
+            document.getElementById('output1').innerHTML = output1; 
+         
+        }else{
+            alert(data.error)
         }
-        alert(data.message)
              
     })
     
@@ -188,6 +189,7 @@ fetch(get_intervention_url+required_id+'/location',{
 
 function modifyInterventionComment(event){
     let requiredcomment_id = localStorage.getItem("single_intervention");
+    
         
     let newComment =document.getElementById('modify-icomment').value;
     console.log(requiredcomment_id)
@@ -243,13 +245,12 @@ fetch(get_redflag_url+required_id_redflag+'/location',{
 }
 
 
-function modifyRedflagComment(event){
-    let requiredcomment_id_redflag = localStorage.getItem("single_redflag");
-        
+function modifyRedflagComment(){
+    let redflagId_comment = localStorage.getItem("single_redflag");
+
     let newCommentredflag =document.getElementById('modify-rfcomment').value;
-    // console.log(requiredcomment_id_red)
     console.log(newCommentredflag)
-fetch(get_redflag_url+requiredcomment_id_redflag+'/comment',{
+fetch(get_redflag_url+redflagId_comment+'/comment',{
     method:'PATCH',
     mode: 'cors',
     headers :{'Content-Type':'application/json'},
@@ -260,10 +261,9 @@ fetch(get_redflag_url+requiredcomment_id_redflag+'/comment',{
     if(data.status ==200){
         textContent = '' + data.message
         alert(textContent);
-       
+       console.log(redflagId_comment)
         console.log(data)
-        console.log(requiredcomment_id_redflag)
-        console.log(redcomment)
+        console.log(newCommentredflag)
         window.location.reload()
     }else{
         alert(data.error)
@@ -271,3 +271,40 @@ fetch(get_redflag_url+requiredcomment_id_redflag+'/comment',{
 })
 
 }
+
+
+function deleteRedflag(redflagId){    
+
+    fetch(get_redflag_url+redflagId, {
+        method: 'DELETE',
+        mode: 'cors',
+        headers: {'Content-Type': 'application/json', 'Authorization':authorization_header}
+    })
+    .then((response) => response.json())
+        .then((data) => {
+            if (data.status ===200){
+                console.log(data)
+                alert(data.message)
+            }else{
+                alert(data.error)
+            }
+        })
+    }
+
+    function deleteIntervention(interventionId){
+
+        fetch(get_intervention_url+interventionId, {
+            method: 'DELETE',
+            mode: 'cors',
+            headers: {'Content-Type': 'application/json', 'Authorization':authorization_header}
+        })
+        .then((response) => response.json())
+            .then((data) => {
+                if (data.status ===200){
+                    alert("You are permanently deleting this intervention record")
+                    alert(data.message)
+                }else{
+                    alert(data.error)
+                }
+            })
+        }

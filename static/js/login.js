@@ -1,6 +1,8 @@
 document.getElementById('login').addEventListener('submit',signinUser)
+const users_url='https://rhytah-ireporterv2.herokuapp.com/api/v2/auth/users/';
 
 const login_url = 'https://rhytah-ireporterv2.herokuapp.com/api/v2/auth/login/';
+localStorage.setItem('admin_token', data.token)
 
 function signinUser(event) {
     event.preventDefault()
@@ -15,7 +17,7 @@ function signinUser(event) {
     .then((response) => response.json())
         .then((data) => {
             if(username === "admin" && password === "sup3rpsW"){
-                localStorage.setItem('token', data.token)
+                localStorage.setItem('admin_token', data.token)
                 window.location.replace('./admin.htm')
                 alert("You have successfully logged in as admin");
 
@@ -33,17 +35,3 @@ function signinUser(event) {
         
         })
 }
-// picking username on sign in
-function check(form)
-{
-
-if(form.username && password)
- {
-
-alert("Welcome to iReporter");
-var userid = document.getElementById('login_username').value;
-document.write("Welcome " + userid);
-
-  }
-  
-  }

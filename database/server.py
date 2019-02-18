@@ -48,4 +48,4 @@ class DatabaseConnect:
         command = f"""
         DROP TABLE IF EXISTS {tablename} CASCADE
         """
-        return self.cursor.execute(command)
+        return self.cursor.execute(command) 
