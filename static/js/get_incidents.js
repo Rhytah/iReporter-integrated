@@ -5,7 +5,6 @@ document.getElementById('modifycomment-btn').addEventListener('click',modifyInte
 
 document.getElementById('save_edits_rf').addEventListener('click',modifyLocationrf);
 document.getElementById('modifycomment-btn_rf').addEventListener('click',modifyRedflagComment);
-// document.getElementById('delete-btn').addEventListener('click',deleteRedflag)
 
 function refreshRedflags(){
     // let invalid = document.getElementById('invalid');
@@ -62,8 +61,6 @@ function refreshRedflags(){
     })
 }
     
-
-
 
 // fetch interventions
 function refreshInterventions(){
@@ -160,7 +157,7 @@ fetch(get_intervention_url+required_id+'/location',{
     if(data.message ==="You have changed intervention's location"){
         textContent = '' + data.message
         alert(textContent);
-           console.log(data)
+        console.log(data)
         window.location.reload()
     }else{
         alert(data.error)
@@ -217,8 +214,6 @@ fetch(get_redflag_url+redflagId+'/location',{
     if(data.status ===200){
         textContent = '' + data.message
         alert(textContent);
-        document.getElementById("intervention_location_latitude").innerHTML=lat
-        document.getElementById("intervention_location_longitude").innerHTML=long
         console.log(data)
         window.location.reload()
     }else{
