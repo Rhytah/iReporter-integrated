@@ -10,7 +10,7 @@ body {
     z-index: 1;
     top: 0;
     left: 0;
-    background-color: #111;
+    background-color: rgba(48, 43, 183, 0.712);
     overflow-x: hidden;
     padding-top: 20px;
   }
@@ -18,8 +18,8 @@ body {
   .sidenav a {
     padding: 6px 8px 6px 16px;
     text-decoration: none;
-    font-size: 25px;
-    color: #818181;
+    font-size: 18px;
+    color: #d7e4e2;
     display: block;
   }
   
@@ -66,7 +66,7 @@ body {
 
 /* Modal Content */
 .modal-content {
-  background-color: #fefefe;
+  background-color: #487dc2;
   margin: auto;
   padding: 20px;
   border: 1px solid #888;

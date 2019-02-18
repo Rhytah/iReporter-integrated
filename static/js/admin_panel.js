@@ -35,6 +35,34 @@ function refreshUsers(){
     })
 }
 
+function modifyRedflagstatus(event){
+    let status_id = document.getElementById('statusId').value;
+    
+        
+    let newStatus =document.getElementById('choices').value;
+    console.log(newStatus)
+    console.log(status_id)
+fetch(get_redflag_url+status_id+'/status',{
+    method:'PATCH',
+    mode: 'cors',
+    headers :{'Content-Type':'application/json','Authorization': "Bearer "+ authorization_header_admin},
+    body : JSON.stringify({"comment":newStatus})
+})
+.then (response => response.json())
+.then((data) => {
+    if(data.status ===200){
+        textContent = '' + data.message
+        alert(textContent);
+       
+        console.log(data)
+        window.location.reload()
+    }else{
+        alert(data.error)
+    }
+})
+
+}
+
 function refreshRedflagsAdmin(){
     fetch(get_redflag_url, {
         method: 'GET',

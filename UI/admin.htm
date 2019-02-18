@@ -17,7 +17,6 @@
             <a href="#landing"></a>
             <a class='tablinks' onclick="openPage('allredflags');refreshRedflagsAdmin();">Red-flags</a>
             <a class='tablinks' onclick="openPage('allinterventions');refreshInterventions();">Interventions</a>
-            <a class='tablinks' onclick="openPage('allusers');refreshUsers();">Registered users</a>
 
             <a class='tablinks'  onclick="parent.location='index.htm'">Logout</a>
           </div>
@@ -29,16 +28,21 @@
             
           <div id="allredflags" class="tabcontent">
               <div id="output"></div>
-              <!-- <button id="myStatusBtn">Open Modal</button> -->
-
-<!-- The Modal -->
+ 
             <div id="myModal" class="modal">
 
             <!-- Modal content -->
             <div class="modal-content" >
                 <span onclick="document.getElementById('myModal').style.display='none'" class="close" title="Close Modal">&times;</span>
                 <p>Change status</p>
+                <input type="number" placeholder="Enter Record Id" id='statuId'>
                 <input type="text" id="newRedflgStatus" placeholder="ENter text here">
+                <select  id="choices">
+                        <option value="underinvestigation">Under Investigation</option>
+                        <option value="resolved">Resolved</option>
+                        <option value="rejected">Rejected</option>
+                      </select>
+                <button onclick="modifyRedflagstatus();">Save changes</button>
             </div>
 
 </div>
