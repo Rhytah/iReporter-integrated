@@ -33,17 +33,3 @@ function signinUser(event) {
         
         })
 }
-// picking username on sign in
-function check(form)
-{
-
-if(form.username && password)
- {
-
-alert("Welcome to iReporter");
-var userid = document.getElementById('login_username').value;
-document.write("Welcome " + userid);
-
-  }
-  
-  }
