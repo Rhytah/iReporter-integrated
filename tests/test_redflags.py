@@ -150,13 +150,13 @@ class RedflagTestCase(BaseTestCase):
             headers=headers,
             content_type='application/json'
         )
-        new_value=dict(location=15.369)
+        new_value=dict(lat=15.369,long=20.658)
         response = self.test_client.patch('/api/v2/red-flags/1/location',
                                         content_type='application/json',
                                         data=json.dumps(new_value))
         response_out = json.loads(response.data.decode())
         self.assertEqual(response.status_code, 200)
-        self.assertIn("You have changed red flag's location to{'location': 15.369}",response_out['message'])
+        self.assertIn("You have changed red flag's location to{'lat': 15.369, 'long': 20.658}",response_out['message'])
     
     def test_modify_comment(self):
         self.test_client.post('/api/v2/auth/signup/',
@@ -182,7 +182,7 @@ class RedflagTestCase(BaseTestCase):
                                         data=json.dumps(new_value))
         response_out = json.loads(response.data.decode())
         self.assertEqual(response.status_code, 200)
-        self.assertIn("You have changed red flag's comment to{'comment': 'new_comment'}",response_out['message'])
+        self.assertIn("You have changed red flag's comment to {'comment': 'new_comment'}",response_out['message'])
 
     def test_modify_status(self):
         self.test_client.post('/api/v2/auth/signup/',
