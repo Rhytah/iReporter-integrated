@@ -3,7 +3,7 @@ body {
   min-width: 250px;
   font-size: 20px;
   background:rgba(36, 112, 163, 0.623);
-  /* background-image: url(../images/whitebg.jpg); */
+  background-image: url(../images/download.jpg);
   background-position: relative;
   background-size: 100%;
   color:#F1C40F;
@@ -98,7 +98,7 @@ button #tablink{
   display: none;
   padding: 100px 20px;
   height: 80%;
-  z-index: 1;
+  z-index: -1;
 }
 .tab{
   padding: 20px;
@@ -437,8 +437,8 @@ tr #editintervention{
   height:fit-content;
 }
 form{
-  background:#AED6F1;
-  color:#1E8449;
+  background:#0FADF1;
+  color:#0F1073;
   width:60%;
   margin:auto;
   /* height:100%; */
@@ -491,9 +491,9 @@ form{
 h3{
   float: right;
 }
-#profile{
-  float: right;
-}
+/* #profile{
+  /* float: right; */
+/* } */
 ul{
   font-size:14px;
 }
@@ -572,7 +572,7 @@ li{
 
 h2 {
   font-size: 30px;
-  color: #fff;
+  color: #0B0C3B;
   text-align: center;
   -webkit-animation: glow 1s ease-in-out infinite alternate;
   -moz-animation: glow 1s ease-in-out infinite alternate;

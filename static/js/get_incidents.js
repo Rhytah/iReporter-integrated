@@ -44,16 +44,29 @@ function refreshRedflags(){
         <td class = "incident-item-3">${redflag.lat}</td>
         <td class = "incident-item-4">${redflag.long}</td>
         <td class = "incident-item-5">${redflag.status}</td>
-        <td id="modifybtns"><a onClick="show('editsection1')">edit</a> <span onClick="deleteRedflag(${redflag.redflag_id});">delete</span></td>
+        <td id="modifybtns"><a onClick="show('editsection1')"><img src="../static/images/edit.png" height="30px" width="30px"></a> 
+        <span onClick="deleteRedflag(${redflag.redflag_id});"><img src="../static/images/delete.png" height="30px" width="30px"></span>
+        </td>
         <td id="unseenid">${redflag.redflag_id}</td>
         </tr>
         
         `;
- 
+        let a_redflag=redflag['redflag_id'];
+        localStorage.setItem("single_redflag",a_redflag);
+        localStorage.getItem("single_redflag");
+        let posted_redflag= localStorage.getItem("single_redflag");
+        let posted_redcomment=redflag['comment'];
+        localStorage.setItem("resultredflag_comment", posted_redcomment);
+        redcomment=localStorage.getItem("resultredflag_comment")
+        console.log(redcomment)
+        console.log(posted_redflag)
+        console.log(a_redflag)
+            
         });
             document.getElementById('output').innerHTML = output;
             alert(data.message)
-
+           
+          
         }else{
             alert(data.error)
         }
@@ -101,15 +114,22 @@ function refreshInterventions(){
         <td class = "incident-item-4" id="modifylong">${intervention.long}</td>
         <td class = "incident-item-5">${intervention.status}</td>
         <td id="modifybtns">
-        <a onClick="show('editsection')">edit</a> |
-        <span onClick="deleteIntervention(${intervention.intervention_id});">delete</span></td>
+        <a onClick="show('editsection')"><img src="../static/images/edit.png" height="30px" width="30px"></a> |
+        <span onClick="deleteIntervention(${intervention.intervention_id});">
+        <img src="../static/images/delete.png" height="30px" width="30px"></span></td>
         </tr>
            
         `;
-          
+        let an_intervention=intervention['intervention_id'];
+        localStorage.setItem("single_intervention",an_intervention);
+        let posted_intervention= localStorage.getItem("single_intervention");
+        let posted_icomment=intervention['comment'];
+        localStorage.setItem("resultintvn_comment", posted_icomment);
+        console.log(posted_intervention);
             });
             alert(data.message)
-            document.getElementById('output1').innerHTML = output1;   
+            document.getElementById('output1').innerHTML = output1; 
+         
         }else{
             alert(data.error)
         }
@@ -169,6 +189,7 @@ fetch(get_intervention_url+required_id+'/location',{
 
 function modifyInterventionComment(event){
     let requiredcomment_id = localStorage.getItem("single_intervention");
+    
         
     let newComment =document.getElementById('modify-icomment').value;
     console.log(requiredcomment_id)
@@ -197,13 +218,13 @@ fetch(get_intervention_url+requiredcomment_id+'/comment',{
 // redflags
 
 
-function modifyLocationrf(redflagId){
-    // let required_id_redflag = localStorage.getItem("single_redflag");
+function modifyLocationrf(event){
+    let required_id_redflag = localStorage.getItem("single_redflag");
         
     let newlat =document.getElementById('edit_location_latitude_redflag').value;
     let newlong =document.getElementById('edit_location_longitude_redflag').value;
     
-fetch(get_redflag_url+redflagId+'/location',{
+fetch(get_redflag_url+required_id_redflag+'/location',{
     method:'PATCH',
     mode: 'cors',
     headers :{'Content-Type':'application/json'},
@@ -224,10 +245,12 @@ fetch(get_redflag_url+redflagId+'/location',{
 }
 
 
-function modifyRedflagComment(redflagId){
+function modifyRedflagComment(){
+    let redflagId_comment = localStorage.getItem("single_redflag");
+
     let newCommentredflag =document.getElementById('modify-rfcomment').value;
     console.log(newCommentredflag)
-fetch(get_redflag_url+redflagId+'/comment',{
+fetch(get_redflag_url+redflagId_comment+'/comment',{
     method:'PATCH',
     mode: 'cors',
     headers :{'Content-Type':'application/json'},
@@ -238,9 +261,9 @@ fetch(get_redflag_url+redflagId+'/comment',{
     if(data.status ==200){
         textContent = '' + data.message
         alert(textContent);
-       
+       console.log(redflagId_comment)
         console.log(data)
-        console.log(redcomment)
+        console.log(newCommentredflag)
         window.location.reload()
     }else{
         alert(data.error)
