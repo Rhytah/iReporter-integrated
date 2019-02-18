@@ -5,7 +5,6 @@ document.getElementById('modifycomment-btn').addEventListener('click',modifyInte
 
 document.getElementById('save_edits_rf').addEventListener('click',modifyLocationrf);
 document.getElementById('modifycomment-btn_rf').addEventListener('click',modifyRedflagComment);
-// document.getElementById('delete-btn').addEventListener('click',deleteRedflag)
 
 function refreshRedflags(){
     // let invalid = document.getElementById('invalid');
@@ -45,7 +44,9 @@ function refreshRedflags(){
         <td class = "incident-item-3">${redflag.lat}</td>
         <td class = "incident-item-4">${redflag.long}</td>
         <td class = "incident-item-5">${redflag.status}</td>
+
         <td id="modifybtns"><a onClick="show('editsection1')">edit</a> <span onClick="deleteRedflag();">delete</span></td>
+
         </tr>
         
         `;
@@ -62,15 +63,12 @@ function refreshRedflags(){
         });
             document.getElementById('output').innerHTML = output;
             alert(data.message)
-
         }
         
         alert(data.error)
     })
 }
     
-
-
 
 // fetch interventions
 function refreshInterventions(){
@@ -114,6 +112,7 @@ function refreshInterventions(){
         <td id="modifybtns">
         <a onClick="show('editsection')">edit</a> |
         <span onClick="deleteIntervention();">delete</span></td>
+
         </tr>
            
         `;
@@ -129,6 +128,7 @@ function refreshInterventions(){
             document.getElementById('output1').innerHTML = output1;   
         }
         // alert(data.error)
+      
              
     })
     
@@ -173,7 +173,7 @@ fetch(get_intervention_url+required_id+'/location',{
     if(data.message ==="You have changed intervention's location"){
         textContent = '' + data.message
         alert(textContent);
-           console.log(data)
+        console.log(data)
         window.location.reload()
     }else{
         alert(data.error)
@@ -230,8 +230,6 @@ fetch(get_redflag_url+required_id_redflag+'/location',{
     if(data.status ===200){
         textContent = '' + data.message
         alert(textContent);
-        document.getElementById("intervention_location_latitude").innerHTML=lat
-        document.getElementById("intervention_location_longitude").innerHTML=long
         console.log(data)
         window.location.reload()
     }else{

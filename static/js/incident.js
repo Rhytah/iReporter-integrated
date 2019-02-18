@@ -31,14 +31,20 @@ fetch(redflag_url,{
 .then ((response) => response.json())
     .then((data) => {
         if(data.message === 'Successfully added red-flag'){
-            alert('Successfully added red-flag');
-            window.location.reload()
+            
             alert(data.message)
-        }else{
+            window.location.reload()
+           
+        }else if(data.msg ==='Token has expired'){
+            alert(data.msg + ' Please login again');
+        }
+        else{
             textContent = '' + data.error
             
             alert(textContent);
         }
+       
+
     })
 }
     //     console.log(data)
