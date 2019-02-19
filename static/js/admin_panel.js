@@ -1,3 +1,5 @@
+const authorization_header_admin =localStorage.getItem('admin_token');
+
 function refreshUsers(){
     let authorization_header_admin =localStorage.getItem('admin_token');
     console.log(authorization_header_admin)
@@ -39,14 +41,14 @@ function modifyRedflagstatus(event){
     let status_id = document.getElementById('statusId').value;
     
         
-    let newStatus =document.getElementById('choices').value;
+    let newStatus =document.getElementById('newRedflgStatus').value;
     console.log(newStatus)
     console.log(status_id)
 fetch(get_redflag_url+status_id+'/status',{
     method:'PATCH',
     mode: 'cors',
-    headers :{'Content-Type':'application/json','Authorization': "Bearer "+ authorization_header_admin},
-    body : JSON.stringify({"comment":newStatus})
+    headers: {'Content-Type': 'application/json', 'Authorization': "Bearer "+ authorization_header_admin },
+    body : JSON.stringify({"status":newStatus})
 })
 .then (response => response.json())
 .then((data) => {
@@ -102,7 +104,7 @@ function refreshRedflagsAdmin(){
         <td class = "incident-item-2">${redflag.video}</td>
         <td class = "incident-item-3">${redflag.lat}</td>
         <td class = "incident-item-4">${redflag.long}</td>
-        <td class = "incident-item-5">${redflag.status} | <span id="myStatusBtn" onclick="show('myModal');">Edit</span></td>
+        <td class = "incident-item-5">${redflag.status} | <span id="myStatusBtn" onclick="show('myModal');">Edit Record status</span></td>
         </tr>
         
         `;

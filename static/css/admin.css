@@ -5,7 +5,7 @@ body {
   
   .sidenav {
     height: 100%;
-    width: 18%;
+    width: 10%;
     position: fixed;
     z-index: 1;
     top: 0;
@@ -14,7 +14,14 @@ body {
     overflow-x: hidden;
     padding-top: 20px;
   }
-  
+  #myStatusBtn{
+    cursor: pointer;
+    font-family: cursive;
+    height:fit-content;
+    width:fit-content;
+    font-weight: bolder;
+    color: crimson;
+  }
   .sidenav a {
     padding: 6px 8px 6px 16px;
     text-decoration: none;
@@ -28,7 +35,7 @@ body {
     cursor: pointer;
   }
   .tabcontent {
-    width:60%
+    width:89%;
   }
   .main {
     margin-left: 18%; /* Same as the width of the sidenav */
