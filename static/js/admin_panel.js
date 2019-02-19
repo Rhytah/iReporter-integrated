@@ -27,10 +27,6 @@ function refreshUsers(){
         
         });
             document.getElementById('outputusers').innerHTML = outputusers;
-            alert(data.message)
-            console.log(a_user)
-            console.log(data)
-
         }
         
         alert(data.error)
@@ -53,10 +49,7 @@ fetch(get_redflag_url+status_id+'/status',{
 .then (response => response.json())
 .then((data) => {
     if(data.status ===200){
-        textContent = '' + data.message
-        alert(textContent);
-       
-        console.log(data)
+
         window.location.reload()
     }else{
         alert(data.error)

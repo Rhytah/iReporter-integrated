@@ -4,7 +4,7 @@ document.getElementById('save_edits').addEventListener('click',modifyLocation);
 document.getElementById('modifycomment-btn').addEventListener('click',modifyInterventionComment);
 
 document.getElementById('save_edits_rf').addEventListener('click',modifyLocationrf);
-document.getElementById('modifycomment-btn_rf').addEventListener('click',modifyRedflagComment);
+// document.getElementById('modifycomment-btn_rf').addEventListener('click',modifyRedflagComment);
 
 function refreshRedflags(){
     // let invalid = document.getElementById('invalid');
@@ -44,7 +44,7 @@ function refreshRedflags(){
         <td class = "incident-item-3">${redflag.lat}</td>
         <td class = "incident-item-4">${redflag.long}</td>
         <td class = "incident-item-5">${redflag.status}</td>
-        <td id="modifybtns"><a onClick="show('editsection1')"><img src="../static/images/edit.png" height="30px" width="30px"></a> 
+        <td id="modifybtns"><a onClick="show('editsection1');"><img src="../static/images/edit.png" height="30px" width="30px"></a> 
         <span onClick="deleteRedflag(${redflag.redflag_id});"><img src="../static/images/delete.png" height="30px" width="30px"></span>
         </td>
         <td id="unseenid">${redflag.redflag_id}</td>
@@ -114,7 +114,7 @@ function refreshInterventions(){
         <td class = "incident-item-4" id="modifylong">${intervention.long}</td>
         <td class = "incident-item-5">${intervention.status}</td>
         <td id="modifybtns">
-        <a onClick="show('editsection')"><img src="../static/images/edit.png" height="30px" width="30px"></a> |
+        <a onClick="show('editsection');"><img src="../static/images/edit.png" height="30px" width="30px"></a> |
         <span onClick="deleteIntervention(${intervention.intervention_id});">
         <img src="../static/images/delete.png" height="30px" width="30px"></span></td>
         </tr>
@@ -248,7 +248,7 @@ fetch(get_redflag_url+required_id_redflag+'/location',{
 function modifyRedflagComment(){
     let redflagId_comment = localStorage.getItem("single_redflag");
 
-    let newCommentredflag =document.getElementById('modify-rfcomment').value;
+    let newCommentredflag = document.getElementById('modify-rfcomment').value;
     console.log(newCommentredflag)
 fetch(get_redflag_url+redflagId_comment+'/comment',{
     method:'PATCH',
