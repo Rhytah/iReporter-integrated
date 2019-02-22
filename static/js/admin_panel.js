@@ -33,7 +33,7 @@ function refreshUsers(){
     })
 }
 
-function modifyRedflagstatus(event){
+function modifyRedflagstatus(id){
     let status_id = document.getElementById('statusId').value;
     
         
@@ -68,19 +68,6 @@ function refreshRedflagsAdmin(){
     .then((data) => {
         if(data.status === 200){
         let output =`<h2>RedFlags</h2>
-        <input type="text" id="myInput" onkeyup="getOneRecord()" placeholder="Search for redflag.." title="Enter title">
-                    <table id="adminRecordtable">
-                    <th> ID </th>
-                    <th> ISSUE</th>
-                    <th> REPORTED ON </th>
-                    <th> CREATED BY</th>
-                    <th> IMAGE </th>
-                    <th> VIDEO </th>
-                    <th> LATITUDE </th>
-                    <th> LONGITUDE</th>
-                    <th> STATUS </th>
-                    
-                    <tbody>
                     `;
         let redflags = data["data"];
         
@@ -88,17 +75,18 @@ function refreshRedflagsAdmin(){
 
         output +=`
         
-        <tr >
-        <td class = "incident-item">${redflag.redflag_id}</td>        
-        <td class = "incident-item">${redflag.comment}</td>        
-        <td class = "incident-item-0">${redflag.created_on}</td>
-        <td class = "incident-item">${redflag.created_by}</td>        
-        <td class = "incident-item-1">${redflag.image}</td>
-        <td class = "incident-item-2">${redflag.video}</td>
-        <td class = "incident-item-3">${redflag.lat}</td>
-        <td class = "incident-item-4">${redflag.long}</td>
-        <td class = "incident-item-5">${redflag.status} | <span id="myStatusBtn" onclick="show('myModal');">Edit Record status</span></td>
-        </tr>
+        <ol>
+        <li><p>${redflag.comment} <span id="dots">...</span><span id="more">
+        <br>
+        Creation Date: ${redflag.created_on}<br>
+        Reported from: ${redflag.lat},${redflag.long}<br>
+         Evidence:${redflag.image},${redflag.video}<br>
+         Current status: ${redflag.status}<br>
+        <span>${redflag.redflag_id}</span><br>
+        <span onClick="modifyRedflagstatus(${redflag.redflag_id});"><img src="../static/images/edit.png"></span></span></p>
+        <button onclick="expandDetails()" id="myBtn">Read more</button>
+    </li>
+        
         
         `;
         

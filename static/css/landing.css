@@ -6,7 +6,7 @@ body, html {
 #navbar {
   overflow: hidden;
   background-color:rgba(2, 72, 119, 0.37);
-  padding: 60px 08px;
+  padding: 40px 08px;
   transition: 0.4s;
   position: fixed;
   width: 100%;
@@ -16,7 +16,7 @@ body, html {
 
 #navbar a {
   float: left;
-  color: black;
+  color:rgb(71, 165, 219);
   text-align: center;
   padding: 8px;
   text-decoration: none;
