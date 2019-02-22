@@ -1,0 +1,101 @@
+table {
+    background:rgba(29, 43, 3, 0.397);
+    font-size: 10px;
+    margin:auto;
+    text-align: left;
+    color:rgb(240, 242, 243);
+    }
+
+#more {display: none;}
+#more img{
+  height: 20px; width: 20px;
+  font-size: 18px;
+  background: wheat;
+
+}
+#unseenid{
+  display: none;
+}
+input{
+  width: 100%;
+  margin:auto;
+  position:relative;
+
+}
+button{
+  
+  display: inline;
+}
+form{
+  background-color: rgba(2, 72, 119, 0.096);
+  color:whitesmoke;
+  width:80%;
+  font-size: 20px;
+  margin:auto;
+  padding: auto;
+  border-top: none;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+.form-inline {  
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+}
+
+.form-inline label {
+  margin: 5px 10px 5px 0;
+}
+
+.form-inline input {
+  vertical-align: middle;
+  margin: 5px 10px 5px 0;
+  padding: 10px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+}
+
+.form-inline button {
+  padding: 10px 20px;
+  background-color: dodgerblue;
+  border: 1px solid #ddd;
+  color: white;
+  cursor: pointer;
+}
+
+.form-inline button:hover {
+  background-color:  rgba(0,0,0, 0.15);
+  ;
+}
+ #lat #long{
+  width: 50%;
+
+}
+.map{
+  height:50%;
+}
+#map-block{
+  display: none;
+  width:450px;
+  height:300px;
+  }
+h3{
+  float: right;
+}
+
+
+#redflags{
+  color:olive;
+  width:100%;
+  /* position: center; */
+  color: white;
+  font-weight: bold;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  width: 80%;
+  padding: 20px;
+  /* text-align: center; */
+}

@@ -18,19 +18,22 @@ function signinUser(event) {
         .then((data) => {
             if(username === "admin" && password === "sup3rpsW"){
                 localStorage.setItem('admin_token', data.token)
+                textcontent = ''+data.message
+                document.getElementById('response').innerHTML=textcontent
                 window.location.replace('./admin.htm')
-                alert("You have successfully logged in as admin");
-
             }
             else if(data.message == "You have successfully logged in"){
-            alert(data.message)
+           textcontent = ''+data.message
+            document.getElementById('response').innerHTML=textcontent
+
             localStorage.setItem('token', data.token)
             localStorage.setItem('username', username)
 
-            window.location.replace('./forum.htm')
+            window.location.replace('./userlanding.html')
             }
             else{
-                alert(data.error);
+                document.getElementById('response').innerHTML=data.error
+                ;
             }
         
         })

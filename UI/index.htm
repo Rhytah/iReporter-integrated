@@ -15,11 +15,11 @@
 <div class="container">
     <h2>Speak up for your community</h2>
     <br>
-    <h3 onclick="show('intro')" >Learn more....</h3>
-  <blockquote id="intro">
+  <blockquote id="intro" class="panel-left">
       Corruption is a huge bane to Africa’s development. 
       <br>
-      African countries must develop novel and localised solutions that will curb this menace, hence the birth of iReporter. 
+      African countries must develop novel and localised solutions that will curb this menace, 
+      <br>hence the birth of iReporter. 
       <br>
       iReporter enables any/every citizen to bring any form of corruption to the notice of appropriate authorities and the general public. 
       <br>
@@ -28,9 +28,9 @@
       <br>
   </blockquote>
       
-        <div class="panel" id="login">
+        <div class="panel-right" id="login">
           <form action="forum.htm">
-                <p id="invalid_login"></p>
+                <p id="response"></p>
               <label for="login_username"><b>Username</b></label>
               <input type="text" placeholder="Enter Valid username" id="login_username" required ="required"/>
         
@@ -47,7 +47,7 @@
     <div id="signup" class="modal">
       <span onclick="document.getElementById('signup').style.display='none'" class="close" title="Close Modal">&times;</span>
       <form class="modal-content animate">
-        
+        <p id="response1"></p>
           <p>Please fill in this form to create an account.</p>
           <hr>
           <label for="fistname"><b>Firstname</b></label>

@@ -6,7 +6,7 @@ input[type=text], input[type=password] {
     margin: 5px 0 22px 0;
     display: inline-block;
     border-bottom: none;
-    background: #f1f1f1;
+    /* background: #f1f1f1; */
 }
 input[type=tel], input[type=email] {
     width: 100%;
@@ -25,14 +25,16 @@ input[type=text]:focus, input[type=password]:focus {
     outline: none;
 }
 
+
 button {
     background-color: #4CAF50;
-    color: white;
+    /* color: white; */
     padding: 6px;
     margin: 8px 0;
     border: none;
+    position: center;
     cursor: pointer;
-    width: 100%;
+    width: 30%;
     opacity: 0.9;
 }
 
@@ -112,6 +114,26 @@ hr {
     background: rgba(2, 72, 119, 0.37);   
     
 }
+blockquote {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 16px;
+    padding:auto;
+    position: center;
+    margin:auto;
+    display: inline;
+}
+.panel-left{
+    width:40%;
+    float:left;
+    font-size:20px;
+font-family: cursive;
+padding:2px 6px;
+margin:auto;}
+.panel-right{
+    width:40%;
+    float:right;
+    margin:auto;
+}
 
 #login .psw{
     float: right;
@@ -163,8 +185,8 @@ hr {
 }
 
 
-/* Change styles for cancel button and signup button on extra small screens */
-@media screen and (max-width: 400px) {
+
+@media screen and (max-width: 420px) {
     .cancelbtn, .signupbtn {
        width: 100%;
     }
@@ -174,6 +196,9 @@ hr {
         height: fit-content;
         margin-left: 0;  
         padding: 0;      
+    }
+    .panel-left{
+        font-size:14px;
     }
     label{
         font-size:14px;

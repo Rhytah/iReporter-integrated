@@ -1,10 +1,5 @@
 const get_redflag_url = 'https://rhytah-ireporterv2.herokuapp.com/api/v2/red-flags/'
 const get_intervention_url = 'https://rhytah-ireporterv2.herokuapp.com/api/v2/interventions/'
-document.getElementById('save_edits').addEventListener('click',modifyLocation);
-document.getElementById('modifycomment-btn').addEventListener('click',modifyInterventionComment);
-
-document.getElementById('save_edits_rf').addEventListener('click',modifyLocationrf);
-// document.getElementById('modifycomment-btn_rf').addEventListener('click',modifyRedflagComment);
 
 function refreshRedflags(){
     // let invalid = document.getElementById('invalid');
@@ -18,57 +13,33 @@ function refreshRedflags(){
     .then((data) => {
         if(data.status === 200){
         let output =`<h2>RedFlags</h2>
-        <input type="text" id="myInput" onkeyup="getOneRecord()" placeholder="Search for redflag.." title="Enter title">
-                    <table id="recordtable">
-                    <th> ISSUE</th>
-                    <th> REPORTED ON </th>
-                    <th> IMAGE </th>
-                    <th> VIDEO </th>
-                    <th> LATITUDE </th>
-                    <th> LONGITUDE</th>
-                    <th> STATUS </th>
-                    <th>SUBMIT EDITS</th>
-                    <tbody>
+        <input type="text" id="myInput" onkeyup="filterComments()" placeholder="Search redflags using comments.." title="Type in a name">    
                     `;
         let redflags = data["data"];
         
         redflags.forEach(function(redflag){
 
         output +=`
-        
-        <tr >
-        <td class = "incident-item">${redflag.comment}</td>        
-        <td class = "incident-item-0">${redflag.created_on}</td>
-        <td class = "incident-item-1">${redflag.image}</td>
-        <td class = "incident-item-2">${redflag.video}</td>
-        <td class = "incident-item-3">${redflag.lat}</td>
-        <td class = "incident-item-4">${redflag.long}</td>
-        <td class = "incident-item-5">${redflag.status}</td>
-        <td id="modifybtns"><a onClick="show('editsection1');"><img src="../static/images/edit.png" height="30px" width="30px"></a> 
-        <span onClick="deleteRedflag(${redflag.redflag_id});"><img src="../static/images/delete.png" height="30px" width="30px"></span>
-        </td>
-        <td id="unseenid">${redflag.redflag_id}</td>
-        </tr>
-        
+        <ol>
+        <li><p>${redflag.comment} <span id="dots">...</span><span id="more">
+        <br>
+        Creation Date: ${redflag.created_on}<br>
+        Reported from: ${redflag.lat},{redflag.long}<br>
+         Evidence:${redflag.image},${redflag.video}<br>
+         Current status: ${redflag.status}<br>
+        <span id="unseenid">${redflag.redflag_id}</span><br>
+        <span onClick="deleteRedflag(${redflag.redflag_id});"><img src="../static/images/delete.png"></span></span></p>
+        <button onclick="expandDetails()" id="myBtn">Read more</button>
+    </li>
         `;
-        let a_redflag=redflag['redflag_id'];
-        localStorage.setItem("single_redflag",a_redflag);
-        localStorage.getItem("single_redflag");
-        let posted_redflag= localStorage.getItem("single_redflag");
-        let posted_redcomment=redflag['comment'];
-        localStorage.setItem("resultredflag_comment", posted_redcomment);
-        redcomment=localStorage.getItem("resultredflag_comment")
-        console.log(redcomment)
-        console.log(posted_redflag)
-        console.log(a_redflag)
+
             
         });
             document.getElementById('output').innerHTML = output;
-            alert(data.message)
-           
+            document.getElementById('msg').innerHTML = data.message           
           
         }else{
-            alert(data.error)
+            document.getElementById('msg').innerHTML = data.error           
         }
         
     })
@@ -87,17 +58,7 @@ function refreshInterventions(){
     .then((data) => {
         if(data.status === 200){
         let output1 =`<h2>Interventions</h2>
-        <input type="text" id="myInput" onkeyup="getOneRecord()" placeholder="Search for intervention.." title="Enter title">
-                <table id="recordtable" style="overflow-x:auto;">
-                <th> ISSUE</th>
-                <th> REPORTED ON </th>
-                <th> IMAGE </th>
-                <th> VIDEO </th>
-                <th> LATITUDE </th>
-                <th> LONGITUDE</th>
-                <th> STATUS </th>
-                <th> SUBMIT EDITS<th>
-                <tbody>
+        <input type="text" id="myInput" onkeyup="filterComments()" placeholder="Search interventions using comments.." title="Type in a name">  
         
         `;
         let interventions = data["data"];
@@ -105,19 +66,17 @@ function refreshInterventions(){
         output1 += `
         
         
-        <tr >
-        <td class = "incident-item" id="comm">${intervention.comment}</td>        
-        <td class = "incident-item-0">${intervention.created_on}</td>
-        <td class = "incident-item-1">${intervention.image}</td>
-        <td class = "incident-item-2">${intervention.video}</td>
-        <td class = "incident-item-3" id="modifylat">${intervention.lat}</td>
-        <td class = "incident-item-4" id="modifylong">${intervention.long}</td>
-        <td class = "incident-item-5">${intervention.status}</td>
-        <td id="modifybtns">
-        <a onClick="show('editsection');"><img src="../static/images/edit.png" height="30px" width="30px"></a> |
-        <span onClick="deleteIntervention(${intervention.intervention_id});">
-        <img src="../static/images/delete.png" height="30px" width="30px"></span></td>
-        </tr>
+        <ol>
+        <li><p>${intervention.comment} <span id="dots">...</span><span id="more">
+        <br>
+        Creation Date: ${intervention.created_on}<br>
+        Reported from: ${intervention.lat},{redflag.long}<br>
+         Evidence:${intervention.image},${intervention.video}<br>
+         Current status: ${intervention.status}<br>
+        <span id="unseenid">${intervention.redflag_id}</span><br>
+        <span onClick="deleteRedflag(${intervention.redflag_id});"><img src="../static/images/delete.png"></span></span></p>
+        <button onclick="expandDetails()" id="myBtn">Read more</button>
+    </li>
            
         `;
         let an_intervention=intervention['intervention_id'];
@@ -127,11 +86,9 @@ function refreshInterventions(){
         localStorage.setItem("resultintvn_comment", posted_icomment);
         console.log(posted_intervention);
             });
-            alert(data.message)
+    
             document.getElementById('output1').innerHTML = output1; 
          
-        }else{
-            alert(data.error)
         }
              
     })

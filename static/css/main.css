@@ -1,31 +1,26 @@
 body {
     font-family: "Lato", sans-serif;
-    color: goldenrod;
+    color: whitesmoke;
     transition: background-color .5s;
-    background:#2471A3;
+    height: 100%; 
+    background: url(../images/notebook.jpg);
     background-repeat: no-repeat;
     background-position: center;
-    margin:10px 20px;
+    background-size:cover;
+    margin:auto;
+    
 
 }
 
 h3{
-    background-color: goldenrod;
-    color:blue;
+    
+    color:rgba(30, 124, 187, 0.801);
     width:10%;
     margin-left: 45%;
     font-size: 16px;
     cursor: pointer;
 }
-blockquote {
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-size: 16px;
-    width:80%;
-    padding:auto;
-    position: center;
-    margin:auto;
-    display: none;
-}
+
 #main {
     transition: margin-left .5s;
     padding: 16px;
