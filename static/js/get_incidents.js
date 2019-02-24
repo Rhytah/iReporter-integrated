@@ -12,37 +12,52 @@ function refreshRedflags(){
     .then((response) => response.json())
     .then((data) => {
         if(data.status === 200){
-        let output =`<h2>RedFlags</h2>
-        <input type="text" id="myInput" onkeyup="filterComments()" placeholder="Search redflags using comments.." title="Type in a name">    
-                    `;
-        let redflags = data["data"];
-        
-        redflags.forEach(function(redflag){
-
-        output +=`
-        <ol>
-        <li><p>${redflag.comment} <span id="dots">...</span><span id="more">
-        <br>
-        Creation Date: ${redflag.created_on}<br>
-        Reported from: ${redflag.lat},{redflag.long}<br>
-         Evidence:${redflag.image},${redflag.video}<br>
-         Current status: ${redflag.status}<br>
-        <span id="unseenid">${redflag.redflag_id}</span><br>
-        <span onClick="deleteRedflag(${redflag.redflag_id});"><img src="../static/images/delete.png"></span></span></p>
-        <button onclick="expandDetails()" id="myBtn">Read more</button>
-    </li>
+        let output =`
+        <input type="text" id="myInput" onkeyup="getOneRecord()" placeholder="Search for redflag.." title="Enter title">
+        <table id="recordtable">
+        <caption>RedFlags</caption>
+        <th scope="col"> COMMENT</th>
+        <th scope="col"> REPORTED ON </th>
+        <th scope="col"> IMAGE </th>
+        <th scope="col"> VIDEO </th>
+        <th scope="col"> LATITUDE </th>
+        <th scope="col"> LONGITUDE</th>
+        <th scope="col"> STATUS </th>
+        <th scope="col">SUBMIT EDITS</th>
+        <tbody>
         `;
+let redflags = data["data"];
 
-            
-        });
-            document.getElementById('output').innerHTML = output;
-            document.getElementById('msg').innerHTML = data.message           
-          
-        }else{
-            document.getElementById('msg').innerHTML = data.error           
-        }
-        
-    })
+redflags.forEach(function(redflag){
+
+output +=`
+
+<tr >
+<td class = "incident-item" scope="row" data-label="COMMENT">${redflag.comment}</td>        
+<td class = "incident-item-0" scope="row" data-label="DATE">${redflag.created_on}</td>
+<td class = "incident-item-1" scope="row" data-label="IMAGE">${redflag.image}</td>
+<td class = "incident-item-2" scope="row" data-label="VIDEO">${redflag.video}</td>
+<td class = "incident-item-3" scope="row" data-label="LATITUDE">${redflag.lat}</td>
+<td class = "incident-item-4" scope="row" data-label="LONGITUDE">${redflag.long}</td>
+<td class = "incident-item-5" scope="row" data-label="STATUS">${redflag.status}</td>
+<td id="modifybtns"><a onClick="show('editsection1')"><img src="../static/images/edit.png" ></a> 
+<span onClick="deleteRedflag(${redflag.redflag_id});"><img src="../static/images/delete.png" ></span>
+</td>
+<td id="unseenid">${redflag.redflag_id}</td>
+</tr>
+
+`;
+
+
+});
+document.getElementById('output').innerHTML = output;
+
+
+}else{
+document.getElementById('msg').innerHTML=data.error
+}
+
+})
 }
     
 
@@ -57,26 +72,36 @@ function refreshInterventions(){
     .then((response) => response.json())
     .then((data) => {
         if(data.status === 200){
-        let output1 =`<h2>Interventions</h2>
-        <input type="text" id="myInput" onkeyup="filterComments()" placeholder="Search interventions using comments.." title="Type in a name">  
-        
+        let output1 =`
+        <input type="text" id="myInput" onkeyup="getOneRecord()" placeholder="Search for intervention.." title="Enter title">
+                <table id="recordtable" style="overflow-x:auto;">
+                <caption>Interventions</caption>
+                <th scope="col"> COMMENT</th>
+                <th scope="col"> REPORTED ON </th>
+                <th scope="col"> IMAGE </th>
+                <th scope="col"> VIDEO </th>
+                <th scope="col"> LATITUDE </th>
+                <th scope="col"> LONGITUDE</th>
+                <th scope="col"> STATUS </th>
+                <th scope="col"> SUBMIT EDITS<th>
+                <tbody>
         `;
         let interventions = data["data"];
         interventions.forEach(function(intervention){
         output1 += `
-        
-        
-        <ol>
-        <li><p>${intervention.comment} <span id="dots">...</span><span id="more">
-        <br>
-        Creation Date: ${intervention.created_on}<br>
-        Reported from: ${intervention.lat},{redflag.long}<br>
-         Evidence:${intervention.image},${intervention.video}<br>
-         Current status: ${intervention.status}<br>
-        <span id="unseenid">${intervention.redflag_id}</span><br>
-        <span onClick="deleteRedflag(${intervention.redflag_id});"><img src="../static/images/delete.png"></span></span></p>
-        <button onclick="expandDetails()" id="myBtn">Read more</button>
-    </li>
+        <tr >
+        <td class = "incident-item" data-label="COMMENT">${intervention.comment}</td>        
+        <td class = "incident-item-0" data-label="DATE">${intervention.created_on}</td>
+        <td class = "incident-item-1" data-label="IMAGE">${intervention.image}</td>
+        <td class = "incident-item-2" data-label="VIDEO">${intervention.video}</td>
+        <td class = "incident-item-3" id="modifylat" data-label="LATITUDE">${intervention.lat}</td>
+        <td class = "incident-item-4" id="modifylong" data-label="LONGITUDE">${intervention.long}</td>
+        <td class = "incident-item-5" data-label="STATUS">${intervention.status}</td>
+        <td id="modifybtns">
+        <a onClick="show('editsection')"><img src="../static/images/edit.png" height="30px" width="30px"></a> |
+        <span onClick="deleteIntervention(${intervention.intervention_id});">
+        <img src="../static/images/delete.png" height="30px" width="30px"></span></td>
+        </tr>
            
         `;
         let an_intervention=intervention['intervention_id'];

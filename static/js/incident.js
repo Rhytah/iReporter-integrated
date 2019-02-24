@@ -13,6 +13,7 @@ let invalid = document.getElementById('invalid')
 
 function addRedflag(event){
     event.preventDefault()
+    let redflagresponse = document.getElementById('responserf')
     let redflag ={
         lat:redflag_lat.value,
         long:redflag_long.value,
@@ -31,30 +32,25 @@ fetch(redflag_url,{
 .then ((response) => response.json())
     .then((data) => {
         if(data.message === 'Successfully added red-flag'){
-            
-            alert(data.message)
-            window.location.reload()
+            console.log(data)
+            redflagresponse.innerHTML=data.message
+            window.location.replace('dashboard.html')
            
         }else if(data.msg ==='Token has expired'){
             alert(data.msg + ' Please login again');
         }
         else{
-            textContent = '' + data.error
-            
-            alert(textContent);
+            redflagresponse.innerHTML=data.error
+
         }
        
 
     })
 }
-    //     console.log(data)
-    // })
-    // .catch((err) => console.log(err), invalid.textContent = "something went wrong")
-// }
-
+   
 // intervention
-const intervention_form= document.getElementById('addintervention');
-intervention_form.addEventListener('submit',addIntervention);
+// const intervention_form= document.getElementById('addintervention');
+// intervention_form.addEventListener('submit',addIntervention);
 let intervention_comment = document.getElementById('intervention_comment');
 
 let intervention_image = document.getElementById('image_path');

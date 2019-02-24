@@ -22,7 +22,7 @@
   <div id="navbar-right">
     <a  href="dashboard.html"><i class="fa fa-fw fa-home"></i>Home</a>
     <a href = "redflag.html"  class="active">Create a Redflag</a>
-    <a>Create an Intervention</a>
+    <a href = "Intervention.html">Create an Intervention</a>
     <a href="index.htm"><i class="fa fa-fw fa-user"></i>Logout</a>
   </div>
 </div>
@@ -63,12 +63,21 @@
                   </div>
                 
                 </p>    
+                  <p id="responserf"></p>
+
             <span>
-                <button type="submit" value='SUBMIT' id="add_redflag" style="color:blue;">SUBMIT</button>
-                 <button style="color:red;">CANCEL</button>   
+                <input type="submit" value='SUBMIT' id="add_redflag" >
+                 <input type="submit" style="background-color:brown;float:right;" value="CANCEL" id="cancelredflag" onclick="window.location.replace('./userlanding.html')">   
             </span>
             </form>
         </div> 
+
+
+        </div>
 </div>
 </div>
+
+
+<script src="../static/js/incident.js"></script>
 </body>
+</html>

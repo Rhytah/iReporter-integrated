@@ -1,0 +1,89 @@
+<!DOCTYPE <!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Redflag|iReporter</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="../static/css/landing.css"/>
+    <link rel="stylesheet" type="text/css" media="screen" href="../static/css/dashboard.css"/>
+    
+    <link rel="stylesheet" type="text/css" media="screen" href="../static/css/main.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <script src="../static/js/main.js"></script>
+    
+    
+</head>
+<body onload="refreshInterventions();">
+<div id="navbar">
+  <a href="#default" id="logo" >iReporter|Dashboard</a>
+  <div id="navbar-right">
+    <a  href="dashboard.html"><i class="fa fa-fw fa-home"></i>Home</a>
+    <a href = "redflag.html">Create a Redflag</a>
+    <a href = "Intervention.html" class="active">Create an Intervention</a>
+    <a href="index.htm"><i class="fa fa-fw fa-user"></i>Logout</a>
+  </div>
+</div>
+ <div id="interventions" >
+  <div id="output1"></div>
+  <div>
+        <div id="redflags">
+
+                        <form id="addintervention">
+                            <h1>Record an Intervention</h1>
+
+                          <label >Issue</label>
+                          <input type="text" id="intervention_comment"  placeholder="What issue are you referring to?">
+                      <br>
+                          <label>Region </label>
+                         
+                          <select id="region">
+                            <option value="Eastern">Eastern Region</option>
+                            <option value="Western">Western Region</option>
+                            <option value="Central">Central Region</option>
+                            <option value="Northern">Northern Region</option>
+                            <option value="Southern">Southern Region</option>
+                          </select>
+                          <label>Geolocation</label>
+                          <span onclick="getLocation();">Pick cordinates</span>
+                          <p type="text" id="intervention_combined_location"> </p>
+
+                          <input type="text" pattern="-?\d{1,3}\.\d+" id="intervention_location_latitude" placeholder="Insert Latitude">
+                          <input type="text" pattern="-?\d{1,3}\.\d+" id="intervention_location_longitude" placeholder="Insert Longitude">
+
+                          <br>
+                          <label>Agency</label>
+                          <select id="agency">
+                            <option value="works">Ministry of Works and transport</option>
+                            <option value="labour">Ministry of Labour and Gender </option>
+                            <option value="internal">Ministry of Internal Affairs</option>
+                          </select>
+                          <br>
+                        
+                          <label>
+                          Attach Image
+                          </label>
+                            <div>
+
+                          <input type="file" name="pic" accept="image/*" id="image_path" multiple>
+                          <span></span>
+                         
+                          <br>
+                        <p>
+                          <label>
+                          Attach Video
+                          </label>
+                        <div>
+                            <input type="file" name="pic" accept="video/*" id="video_path">
+                            <span></span>
+                        </div>
+                                                   
+                          </p>
+                          <input type="submit" value="SUBMIT" id="completeintervention" onclick="addIntervention();">
+                          <input type="submit" value="CANCEL" id="cancelintervention" onclick="window.location.replace('./userlanding.html')">
+
+                        </form>
+                      </div>
+                      </body>
+                      </html>

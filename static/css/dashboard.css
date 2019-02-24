@@ -1,10 +1,34 @@
 table {
-    background:rgba(29, 43, 3, 0.397);
-    font-size: 10px;
-    margin:auto;
-    text-align: left;
-    color:rgb(240, 242, 243);
-    }
+  border: 1px solid #ccc;
+  border-collapse: collapse;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  table-layout: fixed;
+}
+
+table caption {
+  font-size: 1.5em;
+  margin: .5em 0 .75em;
+}
+
+table tr {
+  background-color: #f8f8f80a;
+  border: 1px solid #ddd;
+  padding: .35em;
+}
+
+table th,
+table td {
+  padding: .625em;
+  text-align: center;
+}
+
+table th {
+  font-size: .85em;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
 
 #more {display: none;}
 #more img{
@@ -48,8 +72,8 @@ form{
   background-color: rgba(2, 72, 119, 0.096);
   color:whitesmoke;
   width:80%;
-  font-size: 20px;
-  margin-block-start: 30%;
+  font-size: 14;
+    margin-block-start: 30%;
   padding: auto;
   border-top: none;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
@@ -105,6 +129,10 @@ textarea{
 h3{
   float: right;
 }
+#responserf {
+  color:red;
+  font-size:30px;
+}
 
 
 #redflags{
@@ -116,10 +144,97 @@ h3{
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   position: absolute;
   top: 60%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 2;
+  left: 50%; 
+   transform: translate(-50%, -50%); 
   width: 80%;
-  padding: 10px 10px;
+  padding: 120px 8px;
+  /* text-align: center; */
+}
+#interventions{
+  color:olive;
+  /* width:100%; */
+  position: center;
+  color: white;
+  font-weight: bold;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  width: 80%;
+
+  padding: auto;
+  /* text-align: center; */
+}
+#redflags input[type=submit]{
+  width:40%;
+
+}
+#completeintervention{
+  float: left;
+}
+#cancelintervention{
+  float: right;
+  background-color: brown;
+}
+#modifybtns img{
+  height: 30px;
+  width:30px;
+}
+.incident-item-1,.incident-item-1{
   text-align: center;
+}
+@media screen and (max-width: 600px) {
+  table {
+    border: 0;
+  }
+
+  table caption {
+    font-size: 1.3em;
+  }
+  
+  table thead {
+    border: none;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+  
+  table tr {
+    border-bottom: 3px solid #ddd;
+    display: block;
+    margin-bottom: .625em;
+  }
+  
+  table td {
+    border-bottom: 1px solid #ddd;
+    display: block;
+    font-size: .8em;
+    text-align: right;
+  }
+  
+  table td::before {
+    content: attr(data-label);
+    float: left;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  
+  table td:last-child {
+    border-bottom: 0;
+  }
+  #redflags{
+    padding-top:30px;
+  }
+}
+@media screen and (max-width: 400px) {
+  body{
+    background:black; 
+  }
+  #output{
+    margin-top:50px;
+  }
+  th{
+    display: none;
+  }
 }

@@ -86,3 +86,27 @@ body, html {
     
   }
 }
+@media screen and (max-width: 400px) {
+
+  #navbar {
+    padding: auto !important;
+  }
+  #navbar a {
+    float: none;
+    display: block;
+    text-align: left;
+    font-size: 12px;
+    line-height: 14px;
+
+  }
+  #navbar-right {
+    float: none;
+  }
+  #welcometext{
+    margin:auto;
+    padding:2px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 12px;
+    
+  }
+}

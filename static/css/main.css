@@ -82,21 +82,7 @@ img{
 
 .topright:hover {color: red;}
 
-thead{
-    font-family: Georgia, 'Times New Roman', Times, serif;
-    text-decoration-line: underline;
-}
 
-
-#allredflags td{
-    padding: 10px;
-}
-#allinterventions td{
-    padding: 10px;
-}
-tbody{
-    border-bottom: 2px burlywood;
-}
 h2 {
     font-size: 30px;
     color: #fff;
