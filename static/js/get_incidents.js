@@ -1,6 +1,6 @@
 const get_redflag_url = 'https://rhytah-ireporterv2.herokuapp.com/api/v2/red-flags/'
 const get_intervention_url = 'https://rhytah-ireporterv2.herokuapp.com/api/v2/interventions/'
-
+let authorization_header = localStorage.getItem('token')
 function refreshRedflags(){
     // let invalid = document.getElementById('invalid');
  
@@ -256,24 +256,36 @@ fetch(get_redflag_url+redflagId_comment+'/comment',{
 
 
 function deleteRedflag(redflagId){    
-
-    fetch(get_redflag_url+redflagId, {
-        method: 'DELETE',
-        mode: 'cors',
-        headers: {'Content-Type': 'application/json', 'Authorization':authorization_header}
-    })
-    .then((response) => response.json())
-        .then((data) => {
-            if (data.status ===200){
-                console.log(data)
-                alert(data.message)
-            }else{
-                alert(data.error)
-            }
+    let textContent;
+    if (confirm("Are sure you want to delete this record?")){
+        textContent ="You have deleted redflag";
+        fetch(get_redflag_url+redflagId, {
+            method: 'DELETE',
+            mode: 'cors',
+            headers: {'Content-Type': 'application/json', 'Authorization':"Bearer "+ authorization_header}
         })
+        .then((response) => response.json())
+            .then((data) => {
+                if (data.status ===200){
+                    window.location.reload()
+                    document.getElementById('msg').innerHTML=data.message;
+                } else{
+                    textContent="You chose too cancel"
+                    document.getElementById('msg').innerHTML=textContent;
+
+                }
+                
+            })
+        }
     }
+  
+
+    
 
     function deleteIntervention(interventionId){
+        let textContent;
+        if (confirm("Are sure you want to delete this record?")){
+            textContent ="You have deleted redflag";
 
         fetch(get_intervention_url+interventionId, {
             method: 'DELETE',
@@ -290,3 +302,4 @@ function deleteRedflag(redflagId){
                 }
             })
         }
+    }
