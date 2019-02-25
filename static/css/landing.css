@@ -5,7 +5,7 @@ body, html {
 
 #navbar {
   overflow: hidden;
-  background-color:rgba(2, 72, 119, 0.37);
+  background-color:rgb(2, 72, 119);
   padding: 40px 08px;
   transition: 0.4s;
   position: fixed;

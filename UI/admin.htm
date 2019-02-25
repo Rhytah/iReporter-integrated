@@ -16,7 +16,7 @@
     <div class="sidenav">
             <a href="#landing"></a>
             <a class='tablinks' onclick="openPage('allredflags');refreshRedflagsAdmin();">Red-flags</a>
-            <a class='tablinks' onclick="openPage('allinterventions');refreshInterventions();">Interventions</a>
+            <a class='tablinks' onclick="openPage('allinterventions');refreshInterventionsAdmin();">Interventions</a>
             <a class='tablinks' onclick="openPage('allusers');refreshUsers();">Registered Users</a>
 
             <a class='tablinks'  onclick="parent.location='index.htm'">Logout</a>
@@ -32,7 +32,6 @@
  
             <div id="myModal" class="modal">
 
-            <!-- Modal content -->
             <div class="modal-content" >
                 <span onclick="document.getElementById('myModal').style.display='none'" class="close" title="Close Modal">&times;</span>
                 <p>Change status</p>
@@ -43,13 +42,30 @@
                         <option value="resolved">Resolved</option>
                         <option value="rejected">Rejected</option>
                       </select>
+                      <p id='invalid'></p>
                 <button onclick="modifyRedflagstatus();">Save changes</button>
             </div>
 
 </div>
           </div>
           <div id="allinterventions" class="tabcontent">
-                <div id="output1"></div>
+                <div id="output5"></div>
+                <div id="myModal2" class="modal">
+
+                        <div class="modal-content" >
+                            <span onclick="document.getElementById('myModal2').style.display='none'" class="close" title="Close Modal">&times;</span>
+                            <p>Change status</p>
+                            <input type="number" placeholder="Enter Record Id" id='statusId'>
+                            <input type="text" id="newStatus" placeholder="select from choices below">
+                            <select  id="choices">
+                                    <option value="underinvestigation">Under Investigation</option>
+                                    <option value="resolved">Resolved</option>
+                                    <option value="rejected">Rejected</option>
+                                  </select>
+                                  <p id='invalid'></p>
+                            <button onclick="modifyInterventionStatus();">Save changes</button>
+                        </div>
+            
             </div>
              
           <div id="profile_account" class="tabcontent">

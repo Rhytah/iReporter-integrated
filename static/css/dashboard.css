@@ -71,13 +71,14 @@ button{
 form{
   background-color: rgba(2, 72, 119, 0.096);
   color:whitesmoke;
-  width:80%;
+  width:50%;
   font-size: 14;
     margin-block-start: 30%;
   padding: auto;
   border-top: none;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
+
 .form-inline {  
   display: flex;
   flex-flow: row wrap;
@@ -147,7 +148,7 @@ h3{
   left: 50%; 
    transform: translate(-50%, -50%); 
   width: 80%;
-  padding: 120px 8px;
+  padding: 100px 8px;
   /* text-align: center; */
 }
 #interventions{

@@ -35,11 +35,10 @@ function refreshUsers(){
 
 function modifyRedflagstatus(id){
     let status_id = document.getElementById('statusId').value;
-    
+    let statusresponse=document.getElementById('invalid');
         
     let newStatus =document.getElementById('newRedflgStatus').value;
-    console.log(newStatus)
-    console.log(status_id)
+
 fetch(get_redflag_url+status_id+'/status',{
     method:'PATCH',
     mode: 'cors',
@@ -49,11 +48,21 @@ fetch(get_redflag_url+status_id+'/status',{
 .then (response => response.json())
 .then((data) => {
     if(data.status ===200){
-
         window.location.reload()
-    }else{
-        alert(data.error)
+        statusresponse.innerHTML="You have changed status"
+        
+        
+    }else if(data.status === 404){
+        statusresponse.innerHTML=data.message
     }
+    else if (data.status === 401){
+        statusresponse.innerHTML=data.msg
+    }
+    else if(data.status === 400){
+        statusresponse.innerHTML=data.error
+        
+    }
+
 })
 
 }
@@ -67,7 +76,18 @@ function refreshRedflagsAdmin(){
     .then((response) => response.json())
     .then((data) => {
         if(data.status === 200){
-        let output =`<h2>RedFlags</h2>
+        let output =`
+         <table id="recordtable">
+        <caption>RedFlags</caption>
+        <th scope="col"> COMMENT</th>
+        <th scope="col"> REPORTED ON </th>
+        <th scope="col"> IMAGE </th>
+        <th scope="col"> VIDEO </th>
+        <th scope="col"> LATITUDE </th>
+        <th scope="col"> LONGITUDE</th>
+        <th scope="col"> STATUS </th>
+        <th scope="col"> UPDATE STATUS</th>
+        <tbody>
                     `;
         let redflags = data["data"];
         
@@ -75,28 +95,119 @@ function refreshRedflagsAdmin(){
 
         output +=`
         
-        <ol>
-        <li><p>${redflag.comment} <span id="dots">...</span><span id="more">
-        <br>
-        Creation Date: ${redflag.created_on}<br>
-        Reported from: ${redflag.lat},${redflag.long}<br>
-         Evidence:${redflag.image},${redflag.video}<br>
-         Current status: ${redflag.status}<br>
-        <span>${redflag.redflag_id}</span><br>
-        <span onClick="modifyRedflagstatus(${redflag.redflag_id});"><img src="../static/images/edit.png"></span></span></p>
-        <button onclick="expandDetails()" id="myBtn">Read more</button>
-    </li>
-        
+        <tr >
+        <td class = "incident-item-5" scope="row" data-label="ID">${redflag.redflag_id}</td>
+<td class = "incident-item" scope="row" data-label="COMMENT">${redflag.comment}</td>        
+<td class = "incident-item-0" scope="row" data-label="DATE">${redflag.created_on}</td>
+<td class = "incident-item-1" scope="row" data-label="IMAGE">${redflag.image}</td>
+<td class = "incident-item-2" scope="row" data-label="VIDEO">${redflag.video}</td>
+<td class = "incident-item-3" scope="row" data-label="LATITUDE">${redflag.lat}</td>
+<td class = "incident-item-4" scope="row" data-label="LONGITUDE">${redflag.long}</td>
+<td class = "incident-item-5" scope="row" data-label="STATUS">${redflag.status}  | <span id="modifybtns" onClick="document.getElementById('myModal').style.display='block'"><img src="../static/images/edit.png" ></span> </td>
+<td >
+</td>
+</tr>
+
         
         `;
         
         });
             document.getElementById('output').innerHTML = output;
-            alert(data.message)
-            console.log(data)
+    
+        }else {
+            document.getElementById('output').innerHTML = data.error;
 
         }
         
-        alert(data.error)
     })
+}
+
+
+function refreshInterventionsAdmin(){
+    fetch(get_intervention_url, {
+        method: 'GET',
+        mode: 'cors',
+        headers: {'Content-Type': 'application/json'}
+    })
+    .then((response) => response.json())
+    .then((data) => {
+        if(data.status === 200){
+        let output =`
+         <table id="recordtable">
+        <caption>interventions</caption>
+        <th scope="col"> COMMENT</th>
+        <th scope="col"> REPORTED ON </th>
+        <th scope="col"> IMAGE </th>
+        <th scope="col"> VIDEO </th>
+        <th scope="col"> LATITUDE </th>
+        <th scope="col"> LONGITUDE</th>
+        <th scope="col"> STATUS </th>
+        <th scope="col"> UPDATE STATUS</th>
+        <tbody>
+                    `;
+        let interventions = data["data"];
+        
+        interventions.forEach(function(intervention){
+
+        output +=`
+        
+        <tr >
+        <td class = "incident-item-5" scope="row" data-label="ID">${intervention.intervention_id}</td>
+<td class = "incident-item" scope="row" data-label="COMMENT">${intervention.comment}</td>        
+<td class = "incident-item-0" scope="row" data-label="DATE">${intervention.created_on}</td>
+<td class = "incident-item-1" scope="row" data-label="IMAGE">${intervention.image}</td>
+<td class = "incident-item-2" scope="row" data-label="VIDEO">${intervention.video}</td>
+<td class = "incident-item-3" scope="row" data-label="LATITUDE">${intervention.lat}</td>
+<td class = "incident-item-4" scope="row" data-label="LONGITUDE">${intervention.long}</td>
+<td class = "incident-item-5" scope="row" data-label="STATUS">${intervention.status}  | <span id="modifybtns" onClick="document.getElementById('myModal2').style.display='block'"><img src="../static/images/edit.png" ></span> </td>
+<td >
+</td>
+</tr>
+
+        
+        `;
+        
+        });
+            document.getElementById('output5').innerHTML = output;
+    
+        }else {
+            document.getElementById('output5').innerHTML = data.error;
+
+        }
+        
+    })
+}
+
+function modifyInterventionStatus(id){
+    let intervention_id = document.getElementById('interventionId').value;
+    let statusresponse=document.getElementById('invalid');
+        
+    let newStatus =document.getElementById('newStatus').value;
+
+fetch(get_intervention_url+intervention_id+'/status',{
+    method:'PATCH',
+    mode: 'cors',
+    headers: {'Content-Type': 'application/json', 'Authorization': "Bearer "+ authorization_header_admin },
+    body : JSON.stringify({"status":newStatus})
+})
+.then (response => response.json())
+.then((data) => {
+    if(data.status ===200){
+        window.location.reload()
+        statusresponse.innerHTML="You have changed status"
+        
+        
+    }else if(data.status === 404){
+        statusresponse.innerHTML=data.message
+    }
+    else if (data.status === 401){
+        statusresponse.innerHTML=data.msg
+    }
+    else if(data.status === 400){
+        statusresponse.innerHTML=data.error
+        
+    }
+
+})
+
 }
