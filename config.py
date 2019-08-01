@@ -30,7 +30,7 @@ class TestingConfig(Config):
 class ProductionConfig(Config):
     DEBUG=False
     ENV = 'production'
-    DATABASE_URI= '    postgres://gvvebchmfhkiba:133f5978415d87eb5495f7abe7bb89e6fd3ff2755c00cfef2aa92645467a96af@ec2-54-225-89-195.compute-1.amazonaws.com:5432/detk3fqvhdhgj8'
+    DATABASE_URI= 'postgres://kuzegimbnbuwlw:858f7dd5363a48d534a4184fbe9c3ee5daeadfaf88b73c3267b2aceb92f915b0@ec2-50-16-197-244.compute-1.amazonaws.com:5432/dfktg48dd4p22l'
 
     
 
